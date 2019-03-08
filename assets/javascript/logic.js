@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 
     giphyAPI.createRewardImage("#gameWindow", "words");
-    dictionaryAPI.getData("code")
+    // dictionaryAPI.getData("code")
     // wordsAPI.test();
 
     // autoplay()
