@@ -6,16 +6,15 @@ var game = {
 
 }
 
-var wordsAPI = {
-
-    test: function () {
-        unirest.get("https://wordsapiv1.p.mashape.com/words/soliloquy")
-            .header("X-Mashape-Key", "58a7fd97f6msh94523ee61afca0cp1bee0ajsn5a6d8be811cc")
-            .header("Accept", "application/json")
-            .end(function (result) {
-                console.log("wordsAPI test")
-                console.log(result.status, result.headers, result.body);
-            });
+var dictionaryAPI = {
+    getData: function (word) {
+        $.ajax({
+            url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/"+word+"?key=b4c85922-0be5-4246-8023-ee0594629f97",
+            method: "GET"
+        }).done(function (data) {
+            console.log("words test")
+            console.log(data)
+        });
 
     }
 }
@@ -59,13 +58,7 @@ var giphyAPI = {
 $(document).ready(function () {
 
 
-    $.ajax({
-        url: "https://wordsapiv1.p.mashape.com/words/test?X-Mashape-Key=58a7fd97f6msh94523ee61afca0cp1bee0ajsn5a6d8be811cc",
-        method: "GET"
-    }).then(function (response) {
 
-            console.log(response)
-    });
 
     // after document is ready
     // initialize materialize
@@ -84,6 +77,7 @@ $(document).ready(function () {
 
 
     giphyAPI.createRewardImage("#gameWindow", "words");
+    // dictionaryAPI.getData("code")
     // wordsAPI.test();
 
     // autoplay()

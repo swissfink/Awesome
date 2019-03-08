@@ -1,3 +1,17 @@
 #gameWindow{
     width:800px;
 }
+
+h1 {
+    text-align: center;
+}
+
+#welcome {
+    font-size: 30px;
+    text-align: center;
+}
+
+#modeInstructions {
+    font-size: 24px;
+    text-align: center;
+}
