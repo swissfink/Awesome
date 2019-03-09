@@ -24,6 +24,32 @@
 <body>
     <h1>Awesome Word Game</h1>
 
+    <ul id="slide-out" class="sidenav">     <!--side bar with instructions-->
+            <ul class="collapsible">
+                <h2 id="clickInstructions">Click on your game mode to see the instructions:</h2>
+                    <li>
+                      <div class="collapsible-header">Definition Mode</div>
+                      <div class="collapsible-body"><span>Read the definition given, and click one of the four words in the table which matches the definition. If you get the right answer, you get one point. You will be given a total of 10 definitions.</span></div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header">Synonym Mode</div>
+                      <div class="collapsible-body"><span>You will be given a random word; choose which of the four words in the table is the synonym for the given word. If you get the right answer, you get one point. You will be given a total of 10 random words.</span></div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header">Antonym Mode</div>
+                      <div class="collapsible-body"><span>You will be given a random word; choose which of the four words in the table is the antonym for the given word. If you get the right answer, you get one point. You will be given a total of 10 random words.</span></div>
+                    </li>
+                  </ul>         
+
+                  <ul><h2 id="usefulLinks">Useful Links:</h2>
+                    <li><a href="https://www.merriam-webster.com/" target=" _blank">Merriam-Webster Dictionary</a></li>
+                    <li><a href="https://forvo.com/" target="_blank">Forvo.com (pronunciation)</a></li>
+                    <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank">English Vocabulary Lists</a></li>
+
+                  </ul>
+          </ul>
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                
     <div class="container" id="gameWindow">
 
         <div>

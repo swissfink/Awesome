@@ -58,6 +58,11 @@ var giphyAPI = {
 
 $(document).ready(function () {
 
+    $('.sidenav').sidenav();  //initializes sidebar with instructions
+
+    $('.collapsible').collapsible(); //initializes collapsible instructions in sidebar
+  
+
 
     $.ajax({
         url: "https://wordsapiv1.p.mashape.com/words/test?X-Mashape-Key=58a7fd97f6msh94523ee61afca0cp1bee0ajsn5a6d8be811cc",
