@@ -15,3 +15,24 @@ h1 {
     font-size: 24px;
     text-align: center;
 }
+
+#clickInstructions {
+    font-size: 20px;
+    padding: 10px;
+}
+
+#usefulLinks {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.collapsible-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.collapsible-body {
+    font-size: 18px;
+    line-height: 16px;
+    margin: 10px;
+}

@@ -57,6 +57,11 @@ var giphyAPI = {
 
 $(document).ready(function () {
 
+    $('.sidenav').sidenav();  //initializes sidebar with instructions
+
+    $('.collapsible').collapsible(); //initializes collapsible instructions in sidebar
+  
+
 
 
 
