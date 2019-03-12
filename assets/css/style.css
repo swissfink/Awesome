@@ -43,3 +43,7 @@ h1 {
 .sidenav{
     width:500px;
 }
+
+#gameDisplay{
+    /* display:none; */
+}

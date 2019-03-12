@@ -97,26 +97,20 @@
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
   <div class="container" id="gameWindow">
-
-
-    <h2>
-      The Word
-    </h2>
-    <div>
-      <table>
+    <button id="startBtn">Start</button>
+    <div id="gameDisplay">
+      <h3 id="question">The Word</h3>
+      <table id="answerChoices">
         <tr>
-          <td>Alvin</td>
-          <td>Eclair</td>
+          <td><button data-target="modal1" class="btn modal-trigger" id="answer1">Modal</button></td>
+          <td><button data-target="modal1" class="btn modal-trigger" id="answer2">Modal</button></td>
         </tr>
         <tr>
-          <td>Alan</td>
-          <td>Jellybean</td>
+          <td><button data-target="modal1" class="btn modal-trigger" id="answer3">Modal</button></td>
+          <td><button data-target="modal1" class="btn modal-trigger" id="answer4">Modal</button></td>
         </tr>
-
-
       </table>
     </div>
-    <button data-target="modal1" class="btn modal-trigger modal-close" id="modalTest">Modal</button>
 
     <!-- <div>
       <h2 id="welcome">Welcome! </h2>
@@ -137,12 +131,10 @@
   </div>
 
 
-
-
   <!-- Modal Structure -->
   <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content" id="gameReward">
-      
+    <div class="modal-content" id="gameResult">
+
     </div>
   </div>
 
