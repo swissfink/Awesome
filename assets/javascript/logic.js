@@ -36,6 +36,11 @@ var game = {
     },
 
     definitionMode: function () {
+        console.log("gamemode definition")
+        game.makeRandWord()
+
+        dictionaryAPI.getDataDefinition(game.questionWord)
+
 
     },
 
@@ -50,6 +55,7 @@ var game = {
     },
 
     antonymMode: function () {
+        console.log("gamemode antonym")
         game.makeRandWord()
         $("#question").text(game.questionWord)
 
@@ -66,14 +72,45 @@ var dictionaryAPI = {
     synonyms: [],
     antonyms: [],
 
-    getDataDictionary: function (word) {
+    getDataDefinition: function (word) {
         $.ajax({
             url: "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word + "?key=b4c85922-0be5-4246-8023-ee0594629f97",
             method: "GET"
         }).done(function (data) {
             dictionaryAPI.result = data;
             console.log(data)
-            return dictionaryAPI.result[0].shortdef[0]
+            console.log("definition")
+            $("#question").text(dictionaryAPI.result[0].shortdef[0])
+
+            for (var i = 0; i < 4; i++) {
+                $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
+                $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
+                    console.log("wrong")
+                    $("#startBtn").show();
+                    var newP = $("<p>").text("You are Incorrect!")
+                    $("#gameResult").append(newP)
+                    giphyAPI.createRewardImage("#gameResult", "fail")
+
+
+                })
+
+            }
+
+            game.correctChoiceSelect();
+
+            $("#" + game.correctChoice).text(game.questionWord);
+
+            $("#" + game.correctChoice).off();
+            $("#" + game.correctChoice).on("click", function () {
+                console.log("correct")
+                $("#startBtn").show();
+                var newP = $("<p>").text("You are Correct!")
+                $("#gameResult").append(newP)
+                giphyAPI.createRewardImage("#gameResult", "reward")
+
+
+            })
+
 
         });
     },
@@ -98,20 +135,29 @@ var dictionaryAPI = {
                 // creating choice table
                 for (var i = 0; i < 4; i++) {
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
-                    $("#answer" + (parseInt(i) + parseInt(1))).on("click",function(){
+                    $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
                         console.log("wrong")
-                        
+                        $("#startBtn").show();
+                        var newP = $("<p>").text("You are Incorrect!")
+                        $("#gameResult").append(newP)
+                        giphyAPI.createRewardImage("#gameResult", "fail")
+
+
                     })
-                
+
                 }
                 //creating correct choice
                 dictionaryAPI.Qsynonym = dictionaryAPI.synonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
                 game.correctChoiceSelect()
                 $("#" + game.correctChoice).text(dictionaryAPI.Qsynonym);
 
-                $("#"+game.correctChoice).off();
+                $("#" + game.correctChoice).off();
                 $("#" + game.correctChoice).on("click", function () {
                     console.log("correct")
+                    $("#startBtn").show();
+                    var newP = $("<p>").text("You are Correct!")
+                    $("#gameResult").append(newP)
+                    giphyAPI.createRewardImage("#gameResult", "reward")
 
                 })
 
@@ -134,11 +180,28 @@ var dictionaryAPI = {
             } else {
                 for (var i = 0; i < 4; i++) {
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
+                    $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
+                        console.log("wrong")
+                        $("#startBtn").show();
+                        var newP = $("<p>").text("You are Incorrect!")
+                        $("#gameResult").append(newP)
+                        giphyAPI.createRewardImage("#gameResult", "fail")
+                    })
+
                 }
 
                 dictionaryAPI.Qantonym = dictionaryAPI.synonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
                 game.correctChoiceSelect()
                 $("#" + game.correctChoice).text(dictionaryAPI.Qantonym);
+                $("#" + game.correctChoice).on("click", function () {
+                    console.log("correct")
+                    $("#startBtn").show();
+                    var newP = $("<p>").text("You are Correct!")
+                    $("#gameResult").append(newP)
+                    giphyAPI.createRewardImage("#gameResult", "reward")
+
+                })
+
 
 
             }
@@ -177,11 +240,6 @@ var giphyAPI = {
 
 }
 
-// function autoplay() {
-//     $('.carousel').carousel('next');
-//     setTimeout(autoplay, 4500);
-// }
-
 
 $(document).ready(function () {
 
@@ -218,8 +276,9 @@ $(document).ready(function () {
     $("#startBtn").on("click", function () {
         //begin game on select of game mode
         $("#gameDisplay").show();
-        // $("#startBtn").hide();
-        game.synonymMode();
+        $("#startBtn").hide();
+        $("#startBtn").text("Continue")
+        game.definitionMode();
 
 
     })
