@@ -1,15 +1,16 @@
-var main = {
-
-}
-
 var game = {
     //global variables for the game
     correctChoice: "",
     RNGseed: 0,
     correctSeed: 0,
     questionWord: "",
+    score: 0,
+    life: 3,
+
+    challengeMode: true,
     //the word bank currently GRE words
     wordBank: ["Aberration", "Abreast", "Abstain", "Agog", "Alturism", "Apathy", "Audacious", "Blithe", "Burlesque", "Cacophony", "Confound", "Docile", "Doff", "Dote", "Endow", "Ephemeral", "Facetious", "Fallow", "Flail", "Forage", "Garner", "Gossamer", "Grovel", "Harangue", "Impetuous", "Inert", "Ingrate", "Insipid", "Lax", "Lurid", "Mirth", "Morose", "Oblique", "Opaque", "Overwrought", "Pertain", "Placate", "Plethora", "Pyre", "Reticence", "Ruminate", "Stigma", "Sublime", "Syncopation", "Tawdry", "Terse", "Torrid", "Transgression", "Vapid", "Vestige", "Waft", "Whittle", "Abasement", "Abate", "Apostle", "Apprise", "Bevy", "Boor", "Bucolic", "Capricious", "Chauvinism", "Coffer", "Condone", "Contrite", "Credulous", "Demur", "Deride", "Diatribe", "Discordant", "Divest", "Effigy", "Elucidate", "Esoteric", "Frenetic", "Gall", "Galvanize", "Goad", "Gossamer", "Grandiloquent", "Imbue", "Immutable", "Irascible", "Laconic", "Largesse", "Leery", "Malign", "Maudlin", "Mire", "Modish", "Nascent", "Normative", "Opine", "Pallid", "Panache", "Penchant", "Plethora", "Qualm", "Quell", "Quotidian", "Salient", "Savant", "Stigma", "Tout", "Whet"],
+    // random wrong choices to fill in the choice table
     choices: [0, 0, 0, 0],
 
     makeRandWord: function () {
@@ -18,17 +19,15 @@ var game = {
         game.correctSeed = RNGseed;
         game.questionWord = game.wordBank[game.correctSeed];
 
+        //fill in the choices table
         var arr = [];
         while (arr.length < 4) {
             var r = Math.floor(Math.random() * game.wordBank.length)
-            if (arr.indexOf(r) === -1 && r !== game.correctSeed) arr.push(r);
+            if (arr.indexOf(r) === -1 && r !== game.correctSeed) { arr.push(r) };
         }
         game.choices = arr;
 
     },
-
-
-
 
     correctChoiceSelect: function () {
         //correct choice is the choice id that is the correct answer
@@ -38,30 +37,38 @@ var game = {
     definitionMode: function () {
         console.log("gamemode definition")
         game.makeRandWord()
-
         dictionaryAPI.getDataDefinition(game.questionWord)
-
-
     },
 
     synonymMode: function () {
         console.log("gamemode synonym")
         game.makeRandWord()
         $("#question").text(game.questionWord)
-
         dictionaryAPI.getDataSynonym(game.questionWord);
-
-
     },
 
     antonymMode: function () {
         console.log("gamemode antonym")
         game.makeRandWord()
         $("#question").text(game.questionWord)
-
         dictionaryAPI.getDataAntonym(game.questionWord);
-    }
+    },
 
+    reset: function () {
+        game.score = 0;
+        game.life = 3;
+    },
+
+    createNextButton: function (gamemode) {
+        var nextQuestionButton = $("<button>").text("Next Question")
+        nextQuestionButton.addClass("nextQuestionButton")
+        $("#gameWindow").append(nextQuestionButton)
+        $(".nextQuestionButton").on("click", function () {
+            console.log("next")
+            gamemode();
+            $(this).hide()
+        })
+    }
 }
 
 var dictionaryAPI = {
@@ -80,37 +87,52 @@ var dictionaryAPI = {
             dictionaryAPI.result = data;
             console.log(data)
             console.log("definition")
+            //Question as definition
             $("#question").text(dictionaryAPI.result[0].shortdef[0])
-
+            $(".choiceBtn").off()
+            // creating choice table
             for (var i = 0; i < 4; i++) {
                 $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                 $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
                     console.log("wrong")
                     $("#startBtn").show();
-                    var newP = $("<p>").text("You are Incorrect!")
+                    $("#gameResult").empty();
+                    var newP = $("<p>").text("You are Incorrect! The answer was "+game.questionWord)
                     $("#gameResult").append(newP)
                     giphyAPI.createRewardImage("#gameResult", "fail")
 
 
-                })
+                    game.createNextButton(game.definitionMode);
 
+
+                    if (game.challengeMode) {
+                        game.life--;
+                        if (game.life == 0) {
+                            console.log("gameover")
+                        }
+                    }
+                })
             }
 
             game.correctChoiceSelect();
 
             $("#" + game.correctChoice).text(game.questionWord);
-
             $("#" + game.correctChoice).off();
             $("#" + game.correctChoice).on("click", function () {
                 console.log("correct")
                 $("#startBtn").show();
+                $("#gameResult").empty();
+
                 var newP = $("<p>").text("You are Correct!")
                 $("#gameResult").append(newP)
                 giphyAPI.createRewardImage("#gameResult", "reward")
 
+                game.createNextButton(game.definitionMode);
 
+                if (game.challengeMode) {
+                    game.score++;
+                }
             })
-
 
         });
     },
@@ -118,6 +140,7 @@ var dictionaryAPI = {
     getDataSynonym: function (word) {
 
         // fail case Salient
+
         $.ajax({
             url: "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + word + "?key=202b8895-4b72-4bd2-8286-90efa368f523",
             method: "GET"
@@ -125,29 +148,65 @@ var dictionaryAPI = {
             console.log("Synonym")
             console.log(data)
             // API result
-            dictionaryAPI.result = data;
+            // dictionaryAPI.result = data;
 
             //Check if synonym exists
-            dictionaryAPI.synonyms = dictionaryAPI.result[0].meta.syns[0];
-            if (dictionaryAPI.synonyms === undefined || dictionaryAPI.synonyms.length === 0) {
+            // dictionaryAPI.synonyms = dictionaryAPI.result[0].meta.syns[0];
+            // console.log(data[0].meta.syns[0])
+            if (data.length > 5) {
                 game.synonymMode();
             } else {
+                $(".choiceBtn").off()
+                dictionaryAPI.synonyms = data[0].meta.syns[0];
+                dictionaryAPI.Qsynonym = dictionaryAPI.synonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+
                 // creating choice table
+
                 for (var i = 0; i < 4; i++) {
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                     $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
                         console.log("wrong")
                         $("#startBtn").show();
-                        var newP = $("<p>").text("You are Incorrect!")
+                        $("#gameResult").empty();
+
+                        var newP = $("<p>").text("You are Incorrect! The answer was "+dictionaryAPI.Qsynonym)
                         $("#gameResult").append(newP)
                         giphyAPI.createRewardImage("#gameResult", "fail")
 
+                        game.createNextButton(game.synonymMode);
 
+                        if (game.challengeMode) {
+                            game.life--;
+                            if (game.life == 0) {
+                                console.log("gameover")
+                            }
+                        }
                     })
 
                 }
                 //creating correct choice
-                dictionaryAPI.Qsynonym = dictionaryAPI.synonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+                // if (dictionaryAPI.synonyms.length > 1) {
+                //     dictionaryAPI.Qsynonym = dictionaryAPI.synonyms[0][Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+                //     game.correctChoiceSelect()
+                //     $("#" + game.correctChoice).text(dictionaryAPI.Qsynonym);
+
+                //     $("#" + game.correctChoice).off();
+                //     $("#" + game.correctChoice).on("click", function () {
+                //         console.log("correct")
+                //         $("#startBtn").show();
+                //         $("#gameResult").empty();
+
+                //         var newP = $("<p>").text("You are Correct!")
+                //         $("#gameResult").append(newP)
+                //         giphyAPI.createRewardImage("#gameResult", "reward")
+
+                //         game.createNextButton(game.synonymMode);
+
+                //         if (game.challengeMode) {
+                //             game.score++;
+                //         }
+                //     })
+                // } else {
                 game.correctChoiceSelect()
                 $("#" + game.correctChoice).text(dictionaryAPI.Qsynonym);
 
@@ -155,12 +214,18 @@ var dictionaryAPI = {
                 $("#" + game.correctChoice).on("click", function () {
                     console.log("correct")
                     $("#startBtn").show();
+                    $("#gameResult").empty();
+
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
                     giphyAPI.createRewardImage("#gameResult", "reward")
+                    game.createNextButton(game.synonymMode);
 
+                    if (game.challengeMode) {
+                        game.score++;
+                    }
                 })
-
+                // }
             }
         });
     },
@@ -173,37 +238,77 @@ var dictionaryAPI = {
             console.log("Antonym")
             console.log(data)
 
-            dictionaryAPI.result = data;
-            dictionaryAPI.antonyms = dictionaryAPI.result[0].meta.ants[0];
-            if (dictionaryAPI.antonyms === undefined || dictionaryAPI.antonyms.length === 0) {
+            if (data.length > 5) {
                 game.antonymMode();
             } else {
+                dictionaryAPI.antonyms = data[0].meta.ants[0];
+                dictionaryAPI.Qantonym = dictionaryAPI.antonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+
+                $(".choiceBtn").off()
                 for (var i = 0; i < 4; i++) {
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                     $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
                         console.log("wrong")
                         $("#startBtn").show();
-                        var newP = $("<p>").text("You are Incorrect!")
+                        $("#gameResult").empty();
+                        var newP = $("<p>").text("You are Incorrect! The answer was "+dictionaryAPI.Qantonym)
                         $("#gameResult").append(newP)
                         giphyAPI.createRewardImage("#gameResult", "fail")
+                        if (game.challengeMode) {
+                            game.life--;
+                            if (game.life == 0) {
+                                console.log("gameover")
+                            }
+
+                        }
+
+                        game.createNextButton(game.antonymMode);
+
                     })
 
                 }
 
-                dictionaryAPI.Qantonym = dictionaryAPI.synonyms[Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+                // if (dictionaryAPI.antonyms.length > 1) {
+                //     dictionaryAPI.Qantonym = dictionaryAPI.antonyms[0][Math.floor(Math.random() * dictionaryAPI.synonyms.length)];
+                //     game.correctChoiceSelect()
+                //     $("#" + game.correctChoice).text(dictionaryAPI.Qantonym);
+                //     $("#" + game.correctChoice).on("click", function () {
+                //         console.log("correct")
+                //         $("#startBtn").show();
+                //         $("#gameResult").empty();
+
+
+                //         var newP = $("<p>").text("You are Correct!")
+                //         $("#gameResult").append(newP)
+                //         giphyAPI.createRewardImage("#gameResult", "reward")
+
+                //         game.createNextButton(game.antonymMode);
+
+                //         if (game.challengeMode) {
+                //             game.score++;
+                //         }
+                //     })
+                // } 
+                // else 
+                // {
+
                 game.correctChoiceSelect()
                 $("#" + game.correctChoice).text(dictionaryAPI.Qantonym);
                 $("#" + game.correctChoice).on("click", function () {
                     console.log("correct")
                     $("#startBtn").show();
+                    $("#gameResult").empty();
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
                     giphyAPI.createRewardImage("#gameResult", "reward")
 
+                    game.createNextButton(game.antonymMode);
+
+                    if (game.challengeMode) {
+                        game.score++;
+                    }
                 })
-
-
-
+                // }
             }
         });
     },
@@ -277,44 +382,9 @@ $(document).ready(function () {
         //begin game on select of game mode
         $("#gameDisplay").show();
         $("#startBtn").hide();
-        $("#startBtn").text("Continue")
-        game.definitionMode();
-
-
+        game.antonymMode();
     })
 
 
 
-    // var carouselElem = document.querySelector(".carousel")
-
-
-    // giphyAPI.createRewardImage("#gameWindow", "words");
-    // wordsAPI.test();
-
-    // dictionaryAPI.getDataThesaurus(game.wordBank[0])
-    //will get definition
-    // dictionaryAPI.result[0].shortdef[0]
-    //Will get synonyms
-    // dictionaryAPI.result[0].meta.syns[0]
-    //Will get antonyms
-    //dictionaryAPI.result[0].meta.ants[0]
-
-
-    // autoplay()
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
