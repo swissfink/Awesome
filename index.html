@@ -21,8 +21,6 @@
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-
-
 </head>
 
 <body>
@@ -109,12 +107,31 @@
       </table>
 
     </div> -->
+  
+    <!-- Modal Box Buttons -->
+
+      <button data-target="modal1" class="btn modal-trigger modal-close" id="modalTest">Modal</button>
+
+      <button data-target="modal2" class="btn modal-trigger modal-close" id="modalRedX">Modal 2 - Red "X"</button>
+
+      <button data-target="modal3" class="btn modal-trigger modal-close" id="modalNotHighScore">Modal 3 - Not A High Score</button>
+
+    <!-- Modal Divs -->
     
-    <button data-target="modal1" class="btn modal-trigger modal-close" id="modalTest">Modal</button>
+    <!-- This modal box is for the giphy that displays when a plays chooses the correct word -->
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content" id="gameReward"></div>
+    </div>
 
-    <button data-target="modal2" class="btn modal-trigger modal-close" id="modalRedX">Modal 2 - Red "X"</button>
+    <!-- This modal box is for the red "x" that displays when a plays chooses the wrong word -->
+    <div id="modal2" class="modal modal-fixed-footer">
+        <div class="modal-content" id="notCorrect"></div>
+    </div>
 
-    <button data-target="modal3" class="btn modal-trigger modal-close" id="modalNotHighScore">Modal 3 - Not A High Score</button>
+    <!-- This modal box is for the red input field that displays when a plays achieves a high score -->
+    <div id="modal3" class="modal modal-fixed-footer">
+        <div class="modal-content" id="notHighScore"></div>
+    </div>
 
     <!-- <div>
       <h2 id="welcome">Welcome! </h2>
@@ -125,18 +142,29 @@
       <h2 id="modeInstructions">Choose a game mode from the options below.</h2>
 
       <!-- Game Mode Images and Difficulty Buttons-->
+      <!-- <div class="carousel-fixed-item center"></div> -->
 
       <div class="carousel" id="gameMode">
-        <div class="carousel-fixed-item center">
-          <img class="carousel-item antMode" src="assets/images/Antonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic1">
-          <img class="carousel-item synMode" src="assets/images/Synonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic2">
-          <img class="carousel-item defMode" src="assets/images/Definitions.png" onclick="$('.tap-target').tapTarget('open')" id="pic3">
-          <div id="difficult-buttons">
-            <a class="waves-effect waves-light btn" id="Beginner">Beginner</a>
-            <a class="waves-effect waves-light btn" id="Intermediate">Intermediate</a>
-          </div>
+
+        <div class="carousel-item antMode">
+          <img src="assets/images/Antonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic1">
+          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
+          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
         </div>
-      </div>
+
+        <div class="carousel-item synMode">
+          <img src="assets/images/Synonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic2">
+          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
+          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
+        </div>
+
+        <div class="carousel-item defMode">
+          <img src="assets/images/Definitions.png" onclick="$('.tap-target').tapTarget('open')" id="pic3">
+          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
+          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
+        </div>
+
+      </div> <!-- End of carousel items -->
 
       <!-- Instructions Pop-up -->
 
@@ -174,36 +202,17 @@
 
             <br>
 
-            <a class="waves-effect waves-light btn" onclick="$('.tap-target').tapTarget('close')">Close Instuctions</a>
+            <a class="waves-effect waves-light btn close-button" onclick="$('.tap-target').tapTarget('close')">Close Instuctions</a>
 
-          </div> <!-- end tap-target-content section -->
+          </div> <!-- end of tap-target-content section -->
 
-        </div> <!-- end tap-target section -->
+        </div> <!-- end of tap-target section -->
 
-      </div> <!-- end instructions section -->
+      </div> <!-- end of instructions Pop-up section -->
 
-    </div> <!-- end Game Mode section -->
+    </div> <!-- end of Game Mode Carousel section -->
 
-  </div> <!-- end Game window section -->
-
-
-  <!-- Modal Boxes -->
-  
-  <!-- This modal box is for the giphy that displays when a plays chooses the correct word -->
-  <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content" id="gameReward"></div>
-  </div>
-
-
-  <!-- This modal box is for the red "x" that displays when a plays chooses the wrong word -->
-  <div id="modal2" class="modal modal-fixed-footer">
-      <div class="modal-content" id="notCorrect"></div>
-  </div>
-
-  <!-- This modal box is for the red input field that displays when a plays achieves a high score -->
-  <div id="modal3" class="modal modal-fixed-footer">
-      <div class="modal-content" id="notHighScore"></div>
-  </div>
+  </div> <!-- end of Game window section -->
 
 
   <!-- jQuery link -->

@@ -150,7 +150,7 @@ $(document).ready(function () {
 
 
 
-// Richard's Stuff
+// Stuff Richard Added
 
 
 // Modal Box Displaying red "x" for incorrect answers

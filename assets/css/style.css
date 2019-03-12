@@ -73,31 +73,39 @@ body{
     background-color: #c8e3e8;
 }
 
-.carousel-fixed-item {
-    margin-top: 25px;
+.carousel {
+    margin-top: 30px;
+    position: absolute;
+    top: 150px;
+    right: 35px;
 }
-.carousel-item {
-    border-radius: 10px;
-}
+
 
 #pic1,
 #pic2,
 #pic3 {
     width: 300px;
     height: 300px;
+    border-radius: 10px;
 }
 
-#difficult-buttons {
+.beg-button {
     position: absolute;
-    top: 250px;
-    left: 275px;
+    top: 200px;
+    left: 25px;
+
 }
 
-#intructions {
+.int-button {
     position: absolute;
-    top: 250px;
-    left: 275px;
+    top: 200px;
+    left: 145px;
 }
+
+.close-button {
+    margin-top: 05px;
+}
+
 
 .tap-target-wave {
     display: none;
