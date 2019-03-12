@@ -19,27 +19,32 @@ h1 {
     text-align: center;
 }
 
-#clickInstructions {
-    font-size: 20px;
-    padding: 10px;
-}
-
-#usefulLinks {
-    font-size: 20px;
-    padding: 10px;
-}
-
-.collapsible-header {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.collapsible-body {
-    font-size: 18px;
-    line-height: 16px;
-    margin: 10px;
-}
-
 .sidenav{
-    width:500px;
+    width:350px;
+}
+
+#scoreCard {
+    width: 300px;
+}
+
+#linkCard {
+    width: 300px;
+}
+
+#sideButton {
+    padding: 50px;
+    background-color: #FF9746;
+    width: 120px;
+    float: left;
+}
+
+#sideButtonText {
+    color: white;
+    font-size: 20px;
+    float: left;
+}
+
+#welcomeDiv {
+    text-align: center;
+
 }

@@ -112,6 +112,10 @@ $(document).ready(function () {
     $('#demo-carousel').carousel();
     $('.modal').modal();
 
+    $("#startButton").on("click", function () {
+        console.log("Start game");
+    })
+
 
     $("#modalTest").on("click", function () {
         console.log(1)
