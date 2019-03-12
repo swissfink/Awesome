@@ -153,13 +153,6 @@ $(document).ready(function () {
 // Stuff Richard Added
 
 
-// Modal Box Displaying red "x" for incorrect answers
-$("#modalRedX").on("click", function () {
-    $("#notCorrect").empty();
-    var newX = $("<h1>")
-    newX.text("x").addClass("wrongAnswer");
-    $("#notCorrect").append(newX)
-})
 
 // Modal Box Displaying input field for name of player who achieves a high score
 $("#modalNotHighScore").on("click", function () {

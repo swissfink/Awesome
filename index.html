@@ -110,23 +110,12 @@
   
     <!-- Modal Box Buttons -->
 
-      <button data-target="modal1" class="btn modal-trigger modal-close" id="modalTest">Modal</button>
-
-      <button data-target="modal2" class="btn modal-trigger modal-close" id="modalRedX">Modal 2 - Red "X"</button>
 
       <button data-target="modal3" class="btn modal-trigger modal-close" id="modalNotHighScore">Modal 3 - Not A High Score</button>
 
     <!-- Modal Divs -->
     
-    <!-- This modal box is for the giphy that displays when a plays chooses the correct word -->
-    <div id="modal1" class="modal modal-fixed-footer">
-        <div class="modal-content" id="gameReward"></div>
-    </div>
 
-    <!-- This modal box is for the red "x" that displays when a plays chooses the wrong word -->
-    <div id="modal2" class="modal modal-fixed-footer">
-        <div class="modal-content" id="notCorrect"></div>
-    </div>
 
     <!-- This modal box is for the red input field that displays when a plays achieves a high score -->
     <div id="modal3" class="modal modal-fixed-footer">
@@ -142,26 +131,25 @@
       <h2 id="modeInstructions">Choose a game mode from the options below.</h2>
 
       <!-- Game Mode Images and Difficulty Buttons-->
-      <!-- <div class="carousel-fixed-item center"></div> -->
 
       <div class="carousel" id="gameMode">
 
         <div class="carousel-item antMode">
           <img src="assets/images/Antonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic1">
-          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
-          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
+          <a class="waves-effect waves-light btn beg-button" id="antModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="antModeChallenge">Challenge</a>
         </div>
 
         <div class="carousel-item synMode">
           <img src="assets/images/Synonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic2">
-          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
-          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
+          <a class="waves-effect waves-light btn beg-button" id="synModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="synModeChallenge">Challenge</a>
         </div>
 
         <div class="carousel-item defMode">
           <img src="assets/images/Definitions.png" onclick="$('.tap-target').tapTarget('open')" id="pic3">
-          <a class="waves-effect waves-light btn beg-button" id="Beginner">Beginner</a>
-          <a class="waves-effect waves-light btn int-button" id="Intermediate">Intermediate</a>
+          <a class="waves-effect waves-light btn beg-button" id="defModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="defModeChallenge">Challenge</a>
         </div>
 
       </div> <!-- End of carousel items -->
