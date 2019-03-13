@@ -11,142 +11,234 @@
 
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Link to Google Fonts-->
+
+  <link href="https://fonts.googleapis.com/css?family=Graduate|Noto+Sans" rel=" stylesheet">
+
+
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css" media="screen,projection" />
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-
-
 </head>
 
 <body>
   <h1>Awesome Word Game</h1>
 
-  <ul id="slide-out" class="sidenav" id="slidepanel">
-    <!--side bar with instructions-->
-    <ul class="collapsible">
+  <!-- <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+  <a data-target="slide-out" class=" sidenav-trigger waves-effect waves-light" id="sideButtonText">
+    <div id="sideButton">High Scores and Other Links</div>
+  </a>
 
+  <ul id="slide-out" class="sidenav" id="slidepanel">
+    <!--side panel with high scores, links and saved words-->
+
+    <ul class="collapsible">
 
       <div class="row">
         <div class="col s12 m6">
-          <div class="card blue-grey darken-1">
+          <div class="card" id="scoreCard">
             <div class="card-content white-text">
-              <span class="card-title">High Score</span>
+              <span class="card-title">High Scores</span>
               <table>
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Item Name</th>
-                    <th>Item Price</th>
+                    <th>Score</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr>
                     <td>Alvin</td>
-                    <td>Eclair</td>
-                    <td>$0.87</td>
+                    <td>10</td>
                   </tr>
                   <tr>
                     <td>Alan</td>
-                    <td>Jellybean</td>
-                    <td>$3.76</td>
+                    <td>9</td>
                   </tr>
                   <tr>
                     <td>Jonathan</td>
-                    <td>Lollipop</td>
-                    <td>$7.00</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Abdul Basit Rashid</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Azad</td>
+                    <td>7</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
+              <a href="#">Click here for more scores</a>
             </div>
           </div>
         </div>
       </div>
-      <!-- <h2 id="clickInstructions">Click on your game mode to see the instructions:</h2>
-                    <li>
-                      <div class="collapsible-header">Definition Mode</div>
-                      <div class="collapsible-body"><span>Read the definition given, and click one of the four words in the table which matches the definition. If you get the right answer, you get one point. You will be given a total of 10 definitions.</span></div>
-                    </li>
-                    <li>
-                      <div class="collapsible-header">Synonym Mode</div>
-                      <div class="collapsible-body"><span>You will be given a random word; choose which of the four words in the table is the synonym for the given word. If you get the right answer, you get one point. You will be given a total of 10 random words.</span></div>
-                    </li>
-                    <li>
-                      <div class="collapsible-header">Antonym Mode</div>
-                      <div class="collapsible-body"><span>You will be given a random word; choose which of the four words in the table is the antonym for the given word. If you get the right answer, you get one point. You will be given a total of 10 random words.</span></div>
-                    </li> -->
-    </ul>
 
-    <ul>
-      <h2 id="usefulLinks">Useful Links:</h2>
-      <li><a href="https://www.merriam-webster.com/" target=" _blank">Merriam-Webster Dictionary</a></li>
-      <li><a href="https://forvo.com/" target="_blank">Forvo.com (pronunciation)</a></li>
-      <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank">English Vocabulary
-          Lists</a></li>
-      <li>Saved word list</li>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card" id="linkCard">
+            <div class="card-content white-text">
+              <span class="card-title">Useful Links:</span>
+            </div>
+            <div class="card-action">
+              <ul id="links">
 
+                <li><a href="https://www.merriam-webster.com/" target=" _blank"><button
+                      class="btn">Dictionary</button></a></li>
+                <li><a href="https://www.merriam-webster.com/thesaurus" target=" _blank"><button
+                      class="btn">Thesaurus</button></a></li>
+                <li><a href="https://forvo.com/" target="_blank"><button class="btn">Forvo.com</button></a></li>
+                <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank"> <button
+                      class="btn">Vocabulary Lists</button></a></li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </ul>
   </ul>
-  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
   <div class="container" id="gameWindow">
-    <button id="startBtn">Start</button>
-    <div id="gameDisplay">
-      <h3 id="question">The Word</h3>
-      <table id="answerChoices">
-        <tr>
-          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer1">Modal</button></td>
-          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer2">Modal</button></td>
-        </tr>
-        <tr>
-          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer3">Modal</button></td>
-          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer4">Modal</button></td>
-        </tr>
-      </table>
+
+    <!-- Modal Box Buttons -->
+
+    <div id="challengeStats">Life remaining:<span id="life">3</span> Score:<span id="score">0</span></div>
+
+    <!-- <button data-target="modal3" class="btn modal-trigger modal-close" id="modalNotHighScore">Modal 3 - Not A High
+      Score</button> -->
+
+    <!-- Modal Divs -->
+    <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content" id="gameResult">
+
+      </div>
+    </div>
+
+
+
+
+    <!-- This modal box is for the red input field that displays when a plays achieves a high score -->
+    <div id="modal3" class="modal modal-fixed-footer">
+
+      <div class="modal-content" id="notHighScore"></div>
+
     </div>
 
     <!-- <div>
       <h2 id="welcome">Welcome! </h2>
-    </div>
-
-    <div class="carousel" id="gameMode">
-      <div class="carousel-fixed-item center">
-        <h2 id="modeInstructions">Choose a game mode (definitions, synonyms, or antonyms) in the carousel below.
-        </h2>
-      </div>
-      <img class="carousel-item" src="https://lorempixel.com/250/250/nature/1">
-      <img class="carousel-item" src="https://lorempixel.com/250/250/nature/2">
-      <img class="carousel-item" src="https://lorempixel.com/250/250/nature/3">
-      <img class="carousel-item" src="https://lorempixel.com/250/250/nature/4">
-      <img class="carousel-item" src="https://lorempixel.com/250/250/nature/5">
     </div> -->
 
-  </div>
+
+    <div class="selectGameMode">
 
 
+      <h2 id="modeInstructions">Choose a game mode from the options below.</h2>
+
+      <!-- Game Mode Images and Difficulty Buttons-->
+
+      <div class="carousel" id="gameMode">
+
+        <div class="carousel-item antMode">
+          <img src="assets/images/Antonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic1">
+          <a class="waves-effect waves-light btn beg-button" id="antModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="antModeChallenge">Challenge</a>
+        </div>
+
+        <div class="carousel-item synMode">
+          <img src="assets/images/Synonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic2">
+          <a class="waves-effect waves-light btn beg-button" id="synModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="synModeChallenge">Challenge</a>
+        </div>
+
+        <div class="carousel-item defMode">
+          <img src="assets/images/Definitions.png" onclick="$('.tap-target').tapTarget('open')" id="pic3">
+          <a class="waves-effect waves-light btn beg-button" id="defModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="defModeChallenge">Challenge</a>
+        </div>
+
+      </div> <!-- End of carousel items -->
+
+      <div id="gameDisplay">
+        <h3 id="question">The Word</h3>
+        <table id="answerChoices">
+          <tr>
+            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer1">Modal</button></td>
+            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer2">Modal</button></td>
+          </tr>
+          <tr>
+            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer3">Modal</button></td>
+            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer4">Modal</button></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Instructions Pop-up -->
+
+      <div class="tap-target-wrapper" style="right: -348px; bottom: -327px; position: fixed;">
+        <div class="tap-target">
+          <div class="tap-target-content white-text"
+            style="width: 456px; height: 400px; top: 40px; right: 0px; bottom: 0px; left: 15px; padding: 56px; vertical-align: bottom;">
+
+            <div class="antText">
+              <h5>Antonyms Mode</h5>
+              <p class="white-text">You will be given a random word; choose which of the four words in the table is the
+                antonym for the given word.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of
+                10 random words.</p>
+            </div>
+
+            <div class="synText">
+              <h5>Synonyms Mode</h5>
+              <p class="white-text">You will be given a random word; choose which of the four words in the table is the
+                synonym for the given word.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of
+                10 random words.</p>
+            </div>
+
+            <div class="defText">
+              <h5>Definitions Mode</h5>
+              <p class="white-text">Read the definition given, and click one of the four words in the table which
+                matches
+                the definition.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of 10
+                definitions.</p>
+            </div>
+
+            <br>
+
+            <a class="waves-effect waves-light btn close-button" onclick="$('.tap-target').tapTarget('close')">Close
+              Instuctions</a>
+
+          </div> <!-- end of tap-target-content section -->
+
+        </div> <!-- end of tap-target section -->
+
+      </div> <!-- end of instructions Pop-up section -->
+
+    </div> <!-- end of Game Mode Carousel section -->
+
+  </div> <!-- end of Game window section -->
 
 
-  
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content" id="gameResult">
-
-    </div>
-  </div>
-
+  <!-- jQuery link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <!--JavaScript at end of body for optimized loading-->
+  <!-- Materialize  file-->
   <script type="text/javascript" src="assets/javascript/materialize.min.js"></script>
 
-
+  <!--Group Javascript File-->
   <script src="assets/javascript/logic.js"></script>
 
 </body>

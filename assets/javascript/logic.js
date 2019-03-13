@@ -7,7 +7,7 @@ var game = {
     score: 0,
     life: 3,
 
-    challengeMode: true,
+    challengeMode: false,
     //the word bank currently GRE words
     wordBank: ["Aberration", "Abreast", "Abstain", "Agog", "Alturism", "Apathy", "Audacious", "Blithe", "Burlesque", "Cacophony", "Confound", "Docile", "Doff", "Dote", "Endow", "Ephemeral", "Facetious", "Fallow", "Flail", "Forage", "Garner", "Gossamer", "Grovel", "Harangue", "Impetuous", "Inert", "Ingrate", "Insipid", "Lax", "Lurid", "Mirth", "Morose", "Oblique", "Opaque", "Overwrought", "Pertain", "Placate", "Plethora", "Pyre", "Reticence", "Ruminate", "Stigma", "Sublime", "Syncopation", "Tawdry", "Terse", "Torrid", "Transgression", "Vapid", "Vestige", "Waft", "Whittle", "Abasement", "Abate", "Apostle", "Apprise", "Bevy", "Boor", "Bucolic", "Capricious", "Chauvinism", "Coffer", "Condone", "Contrite", "Credulous", "Demur", "Deride", "Diatribe", "Discordant", "Divest", "Effigy", "Elucidate", "Esoteric", "Frenetic", "Gall", "Galvanize", "Goad", "Gossamer", "Grandiloquent", "Imbue", "Immutable", "Irascible", "Laconic", "Largesse", "Leery", "Malign", "Maudlin", "Mire", "Modish", "Nascent", "Normative", "Opine", "Pallid", "Panache", "Penchant", "Plethora", "Qualm", "Quell", "Quotidian", "Salient", "Savant", "Stigma", "Tout", "Whet"],
     // random wrong choices to fill in the choice table
@@ -97,7 +97,7 @@ var dictionaryAPI = {
                     console.log("wrong")
                     $("#startBtn").show();
                     $("#gameResult").empty();
-                    var newP = $("<p>").text("You are Incorrect! The answer was "+game.questionWord)
+                    var newP = $("<p>").text("You are Incorrect! The answer was " + game.questionWord)
                     $("#gameResult").append(newP)
                     giphyAPI.createRewardImage("#gameResult", "fail")
 
@@ -107,6 +107,7 @@ var dictionaryAPI = {
 
                     if (game.challengeMode) {
                         game.life--;
+                        $("#life").text(game.life)
                         if (game.life == 0) {
                             console.log("gameover")
                         }
@@ -131,6 +132,8 @@ var dictionaryAPI = {
 
                 if (game.challengeMode) {
                     game.score++;
+                    $("#score").text(game.score)
+
                 }
             })
 
@@ -169,7 +172,7 @@ var dictionaryAPI = {
                         $("#startBtn").show();
                         $("#gameResult").empty();
 
-                        var newP = $("<p>").text("You are Incorrect! The answer was "+dictionaryAPI.Qsynonym)
+                        var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qsynonym)
                         $("#gameResult").append(newP)
                         giphyAPI.createRewardImage("#gameResult", "fail")
 
@@ -177,6 +180,8 @@ var dictionaryAPI = {
 
                         if (game.challengeMode) {
                             game.life--;
+                            $("#life").text(game.life)
+
                             if (game.life == 0) {
                                 console.log("gameover")
                             }
@@ -223,6 +228,8 @@ var dictionaryAPI = {
 
                     if (game.challengeMode) {
                         game.score++;
+                        $("#score").text(game.score)
+
                     }
                 })
                 // }
@@ -251,11 +258,13 @@ var dictionaryAPI = {
                         console.log("wrong")
                         $("#startBtn").show();
                         $("#gameResult").empty();
-                        var newP = $("<p>").text("You are Incorrect! The answer was "+dictionaryAPI.Qantonym)
+                        var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qantonym)
                         $("#gameResult").append(newP)
                         giphyAPI.createRewardImage("#gameResult", "fail")
                         if (game.challengeMode) {
                             game.life--;
+                            $("#life").text(game.life)
+
                             if (game.life == 0) {
                                 console.log("gameover")
                             }
@@ -306,6 +315,7 @@ var dictionaryAPI = {
 
                     if (game.challengeMode) {
                         game.score++;
+                        $("#score").text(game.score)
                     }
                 })
                 // }
@@ -345,8 +355,8 @@ var giphyAPI = {
 
 }
 
-
 $(document).ready(function () {
+
 
     $('.sidenav').sidenav();  //initializes sidebar with instructions
 
@@ -368,23 +378,153 @@ $(document).ready(function () {
     $('#demo-carousel').carousel();
     $('.modal').modal();
 
-    //     <button data-target="modal1" class="btn modal-trigger" id="modalTest">Modal</button>
 
 
 
-    $("#modalTest").on("click", function () {
-        giphyAPI.createRewardImage("#gameReward", "reward")
 
-    })
-
-
-    $("#startBtn").on("click", function () {
-        //begin game on select of game mode
+    $("#defModePractice").on("click", function () {
+        game.definitionMode();
+        game.challengeMode = false;
+        $("#modeInstructions").hide();
         $("#gameDisplay").show();
-        $("#startBtn").hide();
-        game.antonymMode();
+        $("#gameMode").hide();
+
     })
+
+    $("#synModePractice").on("click", function () {
+        game.synonymMode();
+        game.challengeMode = false;
+
+        $("#modeInstructions").hide();
+        $("#gameDisplay").show();
+        $("#gameMode").hide();
+
+    })
+
+
+    $("#antModePractice").on("click", function () {
+        game.antonymMode();
+        game.challengeMode = false;
+
+        $("#modeInstructions").hide();
+        $("#gameDisplay").show();
+        $("#gameMode").hide();
+
+    })
+
+    $("#defModeChallenge").on("click", function () {
+        game.definitionMode();
+        game.challengeMode = true;
+
+        $("#modeInstructions").hide();
+        $("#gameDisplay").show();
+        $("#gameMode").hide();
+
+    })
+
+    $("#synModeChallenge").on("click", function () {
+        game.synonymMode();
+        game.challengeMode = true;
+
+        $("#modeInstructions").hide();
+        $("#gameDisplay").show();
+        $("#gameMode").hide();
+
+    })
+
+
+    $("#antModeChallenge").on("click", function () {
+        game.antonymMode();
+        game.challengeMode = true;
+
+        $("#modeInstructions").hide();
+        $("#gameDisplay").show();
+        $("#gameMode").hide();
+
+    })
+
+
 
 
 
 })
+
+
+
+// Stuff Richard Added
+
+
+// Modal Box Displaying input field for name of player who achieves a high score
+$("#modalNotHighScore").on("click", function () {
+    $("#notHighScore").empty();
+    var textOne = $("<div>");
+    textOne.text("Ok. You gave it the good ole college try.");
+    var textTwo = $("<div>");
+    textTwo.text("How about you give it another go?")
+    var textThree = $("<div>");
+    textThree.text("Let's see if you can get a high score.");
+    var textFour = $("<div>");
+    textFour.text("C'mon. We know you can do it!");
+    $("#notHighScore").append(textOne).append(textTwo).append(textThree).append(textFour).addClass("lowScore");
+})
+
+
+// Instruction FeatureDiscovery Function
+
+$(document).ready(function () {
+    $('.tap-target').tapTarget();
+});
+
+
+$(document).ready(function () {
+
+    //Antonym Mode
+    $("#pic1").click(function () {
+        $(".antText").show();
+    });
+
+    $("#pic1").click(function () {
+        $(".synText").hide();
+    });
+
+    $("#pic1").click(function () {
+        $(".defText").hide();
+    });
+
+    //Synonym Mode
+    $("#pic2").click(function () {
+        $(".antText").hide();
+    });
+
+    $("#pic2").click(function () {
+        $(".synText").show();
+    });
+
+    $("#pic2").click(function () {
+        $(".defText").hide();
+    });
+
+    //Defnition Mode
+    $("#pic3").click(function () {
+        $(".antText").hide();
+    });
+
+    $("#pic3").click(function () {
+        $(".synText").hide();
+    });
+
+    $("#pic3").click(function () {
+        $(".defText").show();
+    });
+});
+
+
+
+
+
+
+
+
+
+
+

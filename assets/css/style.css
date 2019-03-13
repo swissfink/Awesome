@@ -2,21 +2,27 @@
     width:800px;
     height: 500px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
+    /* Stuff Richard Added */
+    border-radius: 10px;
+    border-color: #204862;
 }
 
 h1 {
     text-align: center;
+    color: #204862;
 }
 
 #welcome {
     font-size: 30px;
     text-align: center;
+    color: #204862;
 }
 
 #modeInstructions {
     font-size: 24px;
     text-align: center;
+    color: #204862;
 }
 
 #clickInstructions {
@@ -40,10 +46,144 @@ h1 {
     margin: 10px;
 }
 
+
 .sidenav{
-    width:500px;
+
+    width:350px;
+    background-color: #204862;
+}
+
+#scoreCard {
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#linkCard {
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#sideButton {
+    padding: 50px;
+    background-color: #FF9746;
+    width: 120px;
+    float: left;
+}
+
+#sideButtonText {
+    color: #fff;
+    font-size: 20px;
+    float: left;
+}
+
+#welcomeDiv {
+    text-align: center;
+}
+
+ 
+
+/* Stuff Richard Added */
+
+body{
+    background: #FCFFED;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+.level-button {
+    margin-right: 10px;
+}
+
+.btn {
+    background-color: #ff9746;
+    color: #204862;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: #c8e3e8;
+}
+
+.carousel {
+    margin-top: 30px;
+    position: absolute;
+    top: 150px;
+    right: 35px;
+}
+
+
+#pic1,
+#pic2,
+#pic3 {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.beg-button {
+    position: absolute;
+    top: 200px;
+    left: 25px;
+
+}
+
+.int-button {
+    position: absolute;
+    top: 200px;
+    left: 145px;
+}
+
+.close-button {
+    margin-top: 05px;
+}
+
+
+.tap-target-wave {
+    display: none;
+}
+
+.tap-target {
+    background-color: #204862;
+}
+
+.tap-target-content {
+    letter-spacing: .05em;
+}
+
+#modal2 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    bottom: 300px;
+    border-radius: 10px;
+}
+
+.wrongAnswer {
+    font-size: 200px;
+    color: red;
+}
+
+#modal3 {
+    width: 500px;
+    height: 230px;
+    position: absolute;
+    bottom: 300px;
+    border-radius: 10px;
+}
+
+.lowScore {
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    color: #204862;
 }
 
 #gameDisplay{
     display:none;
+}
+
+#challengeStats{
+    position: absolute;
+    top:0px;
+    left:0px;
 }
