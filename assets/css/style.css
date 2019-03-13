@@ -46,10 +46,41 @@ h1 {
     margin: 10px;
 }
 
+
 .sidenav{
-    width:500px;
+
+    width:350px;
+    background-color: #204862;
 }
 
+#scoreCard {
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#linkCard {
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#sideButton {
+    padding: 50px;
+    background-color: #FF9746;
+    width: 120px;
+    float: left;
+}
+
+#sideButtonText {
+    color: #fff;
+    font-size: 20px;
+    float: left;
+}
+
+#welcomeDiv {
+    text-align: center;
+}
+
+ 
 
 /* Stuff Richard Added */
 
