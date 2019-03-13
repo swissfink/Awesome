@@ -1,17 +1,26 @@
-#gameWindow{
-    width:800px;
-    height: 500px;
-    border-style: solid;
-    border-width: 2px;
-    /* Stuff Richard Added */
-    border-radius: 10px;
-    border-color: #204862;
+body {
+    background: #FCFFED;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 h1 {
     text-align: center;
     color: #204862;
+    font-family: 'Graduate', sans-serif;
 }
+
+.btn {
+    background-color: #ff9746;
+    color: #204862;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: #c8e3e8;
+}
+
+
+/* Intro text */
 
 #welcome {
     font-size: 30px;
@@ -25,84 +34,7 @@ h1 {
     color: #204862;
 }
 
-#clickInstructions {
-    font-size: 20px;
-    padding: 10px;
-}
-
-#usefulLinks {
-    font-size: 20px;
-    padding: 10px;
-}
-
-.collapsible-header {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.collapsible-body {
-    font-size: 18px;
-    line-height: 16px;
-    margin: 10px;
-}
-
-
-.sidenav{
-
-    width:350px;
-    background-color: #204862;
-}
-
-#scoreCard {
-    width: 300px;
-    background-color: #6793A3;
-}
-
-#linkCard {
-    width: 300px;
-    background-color: #6793A3;
-}
-
-#sideButton {
-    padding: 50px;
-    background-color: #FF9746;
-    width: 120px;
-    float: left;
-}
-
-#sideButtonText {
-    color: #fff;
-    font-size: 20px;
-    float: left;
-}
-
-#welcomeDiv {
-    text-align: center;
-}
-
- 
-
-/* Stuff Richard Added */
-
-body{
-    background: #FCFFED;
-    font-family: 'Noto Sans', sans-serif;
-
-}
-
-.level-button {
-    margin-right: 10px;
-}
-
-.btn {
-    background-color: #ff9746;
-    color: #204862;
-    border-radius: 10px;
-}
-
-.btn:hover {
-    background-color: #c8e3e8;
-}
+/* The carousel pieces */
 
 .carousel {
     margin-top: 30px;
@@ -110,7 +42,6 @@ body{
     top: 150px;
     right: 35px;
 }
-
 
 #pic1,
 #pic2,
@@ -133,10 +64,11 @@ body{
     left: 145px;
 }
 
-.close-button {
-    margin-top: 05px;
-}
+/* Game mode instructions pieces */
 
+.close-button {
+    margin-top: 5px;
+}
 
 .tap-target-wave {
     display: none;
@@ -150,17 +82,194 @@ body{
     letter-spacing: .05em;
 }
 
-#modal2 {
-    width: 300px;
-    height: 300px;
+/* the game pieces */
+
+#gameWindow{
+    width:800px;
+    height: 500px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #204862;
+}
+
+#gameDisplay{
+    display:none;
+    padding: 50px;
+    color: #204862;
+}
+
+#challengeStats{
+    position: relative;
+    text-align: center;
+    color: #204862;
+    font-size: 18px;
+    top: -2px;
+    left: 541px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #204862;
+    border-radius: 0px 10px 0px 10px;
+    width: 258px;
+}
+
+.nextQuestionButton {
+    background-color: #ff9746;
+    color: #204862;
+    text-transform: uppercase;
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    top: 30px;
+    left: 541px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #204862;
+    border-radius: 10px 0px 10px 0px;
+    width: 258px;
+}
+
+.nextQuestionButton:hover {
+    background-color: #c8e3e8;
+}
+
+#restartGame {
+    background-color: #ff9746;
+    color: #204862;
+    text-transform: uppercase;
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    top: 124px;
+    right: 51px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #204862;
+    border-radius: 0px 10px 0px 10px;
+    width: 258px;
+}
+
+#restartGame:hover {
+    background-color: #c8e3e8;
+}
+
+
+#answerChoices {
+    border: none;
+}
+
+tr,
+td {
+    border: none;
+}
+
+#gameResult {
+    color: #204862;
+    font-size: 22px;
+    text-align: center;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+/* Where the giphy is displayed */
+
+#modal1 {
+    width: 350px;
+    height: 350px;
     position: absolute;
     bottom: 300px;
     border-radius: 10px;
 }
 
-.wrongAnswer {
-    font-size: 200px;
-    color: red;
+
+/* Slide out Section */
+
+#sideButton {
+    padding: 10px;
+    background-color: #FF9746;
+    float: left;
+    border-radius: 10px 10px 0 0;
+    transform: rotate(90deg);
+    height: 300px;
+    width: 300px;
+    position: relative;
+    right: 250px;
+}
+
+#sideButtonText {
+    color: #204862;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+    margin-right: 10px;
+    position: relative;
+    left: 0;
+}
+
+/* #sideButtonText:focus {
+    color: #fff;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+    margin-right: 10px;
+    position: relative;
+    left: 325px;
+} */
+
+
+.sidenav{
+    width:325px;
+    background-color: #204862;
+}
+
+.collapsible-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.collapsible-body {
+    font-size: 18px;
+    line-height: 16px;
+    margin: 10px;
+}
+
+#scoreCard {
+    margin-top: 15px;
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#linkCard {
+    width: 300px;
+    background-color: #6793A3;
+}
+
+#usefulLinks {
+    font-size: 20px;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Not sure if we still need this stuff so I'm going to leave it here */
+
+
+.level-button {
+    margin-right: 10px;
 }
 
 #modal3 {
@@ -177,3 +286,4 @@ body{
     line-height: 40px;
     color: #204862;
 }
+
