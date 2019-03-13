@@ -176,4 +176,16 @@ body{
     text-align: center;
     line-height: 40px;
     color: #204862;
+
+}
+
+#gameDisplay{
+    display:none;
+}
+
+#challengeStats{
+    position: absolute;
+    top:0px;
+    left:0px;
+
 }
