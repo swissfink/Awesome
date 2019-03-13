@@ -112,10 +112,6 @@ $(document).ready(function () {
     $('#demo-carousel').carousel();
     $('.modal').modal();
 
-    $("#startButton").on("click", function () {
-        console.log("Start game");
-    })
-
 
     $("#modalTest").on("click", function () {
         console.log(1)
@@ -153,6 +149,74 @@ $(document).ready(function () {
 })
 
 
+
+// Stuff Richard Added
+
+
+
+// Modal Box Displaying input field for name of player who achieves a high score
+$("#modalNotHighScore").on("click", function () {
+    $("#notHighScore").empty();
+    var textOne = $("<div>");
+    textOne.text("Ok. You gave it the good ole college try.");
+    var textTwo = $("<div>");
+    textTwo.text("How about you give it another go?") 
+    var textThree = $("<div>");
+    textThree.text("Let's see if you can get a high score.");
+    var textFour = $("<div>");
+    textFour.text("C'mon. We know you can do it!");
+    $("#notHighScore").append(textOne).append(textTwo).append(textThree).append(textFour).addClass("lowScore");
+})
+
+
+// Instruction FeatureDiscovery Function
+
+$(document).ready(function(){
+    $('.tap-target').tapTarget();
+});
+
+
+$(document).ready(function(){
+
+    //Antonym Mode
+    $("#pic1").click(function(){
+        $(".antText").show();
+      });
+    
+    $("#pic1").click(function(){
+      $(".synText").hide();
+    });
+
+    $("#pic1").click(function(){
+        $(".defText").hide();
+      });
+
+    //Synonym Mode
+    $("#pic2").click(function(){
+        $(".antText").hide();
+    });
+    
+    $("#pic2").click(function(){
+      $(".synText").show();
+    });
+
+    $("#pic2").click(function(){
+        $(".defText").hide();
+      });
+
+    //Defnition Mode
+    $("#pic3").click(function(){
+        $(".antText").hide();
+    });
+    
+    $("#pic3").click(function(){
+      $(".synText").hide();
+    });
+
+    $("#pic3").click(function(){
+        $(".defText").show();
+      });
+  });
 
 
 
