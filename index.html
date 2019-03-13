@@ -13,8 +13,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!--Link to Google Fonts-->
-
+c
   <link href="https://fonts.googleapis.com/css?family=Graduate|Noto+Sans" rel=" stylesheet">
+
 
 
   <!--Import materialize.css-->
@@ -91,6 +92,7 @@
             <div class="card-action">
               <ul id="links">
 
+
                 <li><a href="https://www.merriam-webster.com/" target=" _blank"><button
                       class="btn">Dictionary</button></a></li>
                 <li><a href="https://www.merriam-webster.com/thesaurus" target=" _blank"><button
@@ -98,6 +100,7 @@
                 <li><a href="https://forvo.com/" target="_blank"><button class="btn">Forvo.com</button></a></li>
                 <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank"> <button
                       class="btn">Vocabulary Lists</button></a></li>
+
 
               </ul>
             </div>
@@ -107,7 +110,7 @@
     </ul>
   </ul>
 
-  <div class="container" id="gameWindow">
+
 
     <!-- Modal Box Buttons -->
 
@@ -180,6 +183,69 @@
           </tr>
         </table>
       </div>
+
+      <!-- Instructions Pop-up -->
+
+      <div class="tap-target-wrapper" style="right: -348px; bottom: -327px; position: fixed;">
+        <div class="tap-target">
+          <div class="tap-target-content white-text"
+            style="width: 456px; height: 400px; top: 40px; right: 0px; bottom: 0px; left: 15px; padding: 56px; vertical-align: bottom;">
+
+            <div class="antText">
+              <h5>Antonyms Mode</h5>
+              <p class="white-text">You will be given a random word; choose which of the four words in the table is the
+                antonym for the given word.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of
+                10 random words.</p>
+            </div>
+
+            <div class="synText">
+              <h5>Synonyms Mode</h5>
+              <p class="white-text">You will be given a random word; choose which of the four words in the table is the
+                synonym for the given word.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of
+                10 random words.</p>
+            </div>
+
+
+            <div class="defText">
+              <h5>Definitions Mode</h5>
+              <p class="white-text">Read the definition given, and click one of the four words in the table which
+                matches
+                the definition.</p>
+              <br>
+              <p>If you get the right answer, you get one point. You will be given a total of 10
+                definitions.</p>
+            </div>
+
+
+      <h2 id="modeInstructions">Choose a game mode from the options below.</h2>
+
+      <!-- Game Mode Images and Difficulty Buttons-->
+
+      <div class="carousel" id="gameMode">
+
+        <div class="carousel-item antMode">
+          <img src="assets/images/Antonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic1">
+          <a class="waves-effect waves-light btn beg-button" id="antModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="antModeChallenge">Challenge</a>
+        </div>
+
+        <div class="carousel-item synMode">
+          <img src="assets/images/Synonyms.png" onclick="$('.tap-target').tapTarget('open')" id="pic2">
+          <a class="waves-effect waves-light btn beg-button" id="synModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="synModeChallenge">Challenge</a>
+        </div>
+
+        <div class="carousel-item defMode">
+          <img src="assets/images/Definitions.png" onclick="$('.tap-target').tapTarget('open')" id="pic3">
+          <a class="waves-effect waves-light btn beg-button" id="defModePractice">Practice</a>
+          <a class="waves-effect waves-light btn int-button" id="defModeChallenge">Challenge</a>
+        </div>
+
+      </div> <!-- End of carousel items -->
 
       <!-- Instructions Pop-up -->
 
