@@ -196,7 +196,7 @@ var dictionaryAPI = {
                     $("#gameResult").empty();
                     var newP = $("<p>").text("You are Incorrect!").text("The answer was " + game.questionWord);
                     $("#gameResult").append(newP);
-                    giphyAPI.createRewardImage("#gameResult", "fail");
+                    giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10));
 
 
                     if (game.challengeMode) {
@@ -230,7 +230,7 @@ var dictionaryAPI = {
 
                 var newP = $("<p>").text("You are Correct!");
                 $("#gameResult").append(newP);
-                giphyAPI.createRewardImage("#gameResult", "reward");
+                giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10));
 
                 game.createNextButton(game.definitionMode);
 
@@ -279,7 +279,7 @@ var dictionaryAPI = {
                         $("#gameResult").empty();
                         var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qsynonym)
                         $("#gameResult").append(newP)
-                        giphyAPI.createRewardImage("#gameResult", "fail")
+                        giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10))
 
                         if (game.challengeMode) {
                             game.life--;
@@ -338,7 +338,7 @@ var dictionaryAPI = {
 
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
-                    giphyAPI.createRewardImage("#gameResult", "reward")
+                    giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10))
                     game.createNextButton(game.synonymMode);
 
                     if (game.challengeMode) {
@@ -376,7 +376,7 @@ var dictionaryAPI = {
                         $("#gameResult").empty();
                         var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qantonym)
                         $("#gameResult").append(newP)
-                        giphyAPI.createRewardImage("#gameResult", "fail")
+                        giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10))
                         if (game.challengeMode) {
                             game.life--;
                             $("#life").text(game.life)
@@ -431,7 +431,7 @@ var dictionaryAPI = {
                     $("#gameResult").empty();
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
-                    giphyAPI.createRewardImage("#gameResult", "reward")
+                    giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10))
 
                     game.createNextButton(game.antonymMode);
 
@@ -463,9 +463,9 @@ var giphyAPI = {
         return queryURL + $.param(queryParam);
     },
 
-    createRewardImage(appendLocation, topic) {
+    createRewardImage: function (appendLocation, topic, offset) {
         $.ajax({
-            url: giphyAPI.makeQueryURL(giphyAPI.api_key, topic, "1", "", ""),
+            url: giphyAPI.makeQueryURL(giphyAPI.api_key, topic, "1", "", offset),
             method: "GET"
         }).then(function (response) {
             var newImage = $("<img>");
@@ -473,6 +473,11 @@ var giphyAPI = {
             $(appendLocation).append(newImage)
 
         });
+    },
+
+    offsetRNG: function (limit) {
+        var offsetSeed = Math.floor(Math.random() * limit)
+        return offsetSeed
     }
 
 }
@@ -611,14 +616,18 @@ $(document).ready(function () {
 
     //Submiting highscore
     $("#scoreSubmit").on("click", function (event) {
-
         event.preventDefault();
-        var username = $("#usernameInput").val();
-        game.submitScore(username, game.score, game.scorePath)
-        $("#scoreEnter").attr("disabled", true)
-        $(this).attr("disabled", true)
-        $("#scoreEnter").text("Score Entered")
 
+        var username = $("#usernameInput").val().trim();
+
+        if (username !== ""){
+            game.submitScore(username, game.score, game.scorePath)
+            $("#scoreEnter").attr("disabled", true)
+            $(this).attr("disabled", true)
+            $("#scoreEnter").text("Score Entered")
+        }else{
+            console.log("error")
+        }
     })
 
 

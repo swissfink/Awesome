@@ -19,6 +19,14 @@ h1 {
     background-color: #c8e3e8;
 }
 
+.tabs{
+    color: white;
+    background-color: #6793A3;
+}
+
+a{
+    text-decoration: none;
+}
 
 /* Intro text */
 
