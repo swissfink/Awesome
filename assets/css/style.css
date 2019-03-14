@@ -13,6 +13,7 @@ h1 {
     background-color: #ff9746;
     color: #204862;
     border-radius: 10px;
+    
 }
 
 .btn:hover {
@@ -235,18 +236,39 @@ td {
 
 #scoreCard {
     margin-top: 15px;
-    width: 300px;
+    width: 280px;
     background-color: #6793A3;
+    border-radius: 10px;
+}
+
+th {
+    color: #FF9746;
+    font-size: 20px;
+}
+
+#click {
+    text-align: center;
 }
 
 #linkCard {
-    width: 300px;
+    width: 280px;
     background-color: #6793A3;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#scoresText {
+    text-align: center;
+}
+
+#linkText {
+    text-align: center;
 }
 
 #usefulLinks {
     font-size: 20px;
     padding: 10px;
+    
 }
 
 
