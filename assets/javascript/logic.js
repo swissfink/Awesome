@@ -97,9 +97,9 @@ var dictionaryAPI = {
                     console.log("wrong")
                     $("#startBtn").show();
                     $("#gameResult").empty();
-                    var newP = $("<p>").text("You are Incorrect! The answer was " + game.questionWord)
-                    $("#gameResult").append(newP)
-                    giphyAPI.createRewardImage("#gameResult", "fail")
+                    var newP = $("<p>").text("You are Incorrect!").text("The answer was " + game.questionWord);
+                    $("#gameResult").append(newP);
+                    giphyAPI.createRewardImage("#gameResult", "fail");
 
 
                     game.createNextButton(game.definitionMode);
@@ -109,7 +109,7 @@ var dictionaryAPI = {
                         game.life--;
                         $("#life").text(game.life)
                         if (game.life == 0) {
-                            console.log("gameover")
+                            console.log("gameover");
                         }
                     }
                 })
@@ -124,15 +124,15 @@ var dictionaryAPI = {
                 $("#startBtn").show();
                 $("#gameResult").empty();
 
-                var newP = $("<p>").text("You are Correct!")
-                $("#gameResult").append(newP)
-                giphyAPI.createRewardImage("#gameResult", "reward")
+                var newP = $("<p>").text("You are Correct!");
+                $("#gameResult").append(newP);
+                giphyAPI.createRewardImage("#gameResult", "reward");
 
                 game.createNextButton(game.definitionMode);
 
                 if (game.challengeMode) {
                     game.score++;
-                    $("#score").text(game.score)
+                    $("#score").text(game.score);
 
                 }
             })
@@ -357,12 +357,9 @@ var giphyAPI = {
 
 $(document).ready(function () {
 
-
     $('.sidenav').sidenav();  //initializes sidebar with instructions
 
     $('.collapsible').collapsible(); //initializes collapsible instructions in sidebar
-
-
 
     // after document is ready
     // initialize materialize
@@ -379,7 +376,7 @@ $(document).ready(function () {
     $('.modal').modal();
 
 
-
+    
 
 
     $("#defModePractice").on("click", function () {
@@ -444,17 +441,20 @@ $(document).ready(function () {
     })
 
 
-
-
-
 })
 
 
 
 // Stuff Richard Added
 
+// Restart Button 
+$("#restartGame").on("click", function () {
+    $("#modeInstructions").show();
+    $("#gameDisplay").hide();
+    $("#gameMode").show();        
+})
 
-// Modal Box Displaying input field for name of player who achieves a high score
+// Modal Box Displaying message when player does NOT acheive a high score
 $("#modalNotHighScore").on("click", function () {
     $("#notHighScore").empty();
     var textOne = $("<div>");
@@ -517,82 +517,4 @@ $(document).ready(function () {
         $(".defText").show();
     });
 });
-
-// Stuff Richard Added
-
-
-
-// Modal Box Displaying input field for name of player who achieves a high score
-$("#modalNotHighScore").on("click", function () {
-    $("#notHighScore").empty();
-    var textOne = $("<div>");
-    textOne.text("Ok. You gave it the good ole college try.");
-    var textTwo = $("<div>");
-    textTwo.text("How about you give it another go?") 
-    var textThree = $("<div>");
-    textThree.text("Let's see if you can get a high score.");
-    var textFour = $("<div>");
-    textFour.text("C'mon. We know you can do it!");
-    $("#notHighScore").append(textOne).append(textTwo).append(textThree).append(textFour).addClass("lowScore");
-})
-
-
-// Instruction FeatureDiscovery Function
-
-$(document).ready(function(){
-    $('.tap-target').tapTarget();
-});
-
-
-$(document).ready(function(){
-
-    //Antonym Mode
-    $("#pic1").click(function(){
-        $(".antText").show();
-      });
-    
-    $("#pic1").click(function(){
-      $(".synText").hide();
-    });
-
-    $("#pic1").click(function(){
-        $(".defText").hide();
-      });
-
-    //Synonym Mode
-    $("#pic2").click(function(){
-        $(".antText").hide();
-    });
-    
-    $("#pic2").click(function(){
-      $(".synText").show();
-    });
-
-    $("#pic2").click(function(){
-        $(".defText").hide();
-      });
-
-    //Defnition Mode
-    $("#pic3").click(function(){
-        $(".antText").hide();
-    });
-    
-    $("#pic3").click(function(){
-      $(".synText").hide();
-    });
-
-    $("#pic3").click(function(){
-        $(".defText").show();
-      });
-  });
-
-
-
-
-
-
-
-
-
-
 
