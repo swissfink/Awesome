@@ -19,13 +19,37 @@ h1 {
     background-color: #c8e3e8;
 }
 
-.tabs{
-    color: white;
+
+
+
+
+
+
+.tabs .tab a{
+    color:white;
     background-color: #6793A3;
-}
+} /*Black color to the text*/
+
+.tabs .tab a:hover {
+    background-color:#c8e3e8;
+    color:white;
+} /*Text color on hover*/
+
+.tabs .tab a.active {
+    background-color:#ff9746 !important;
+    color:#204862;
+    
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+    background-color:#204862;
+} /*Color of underline*/
+
+
 
 a{
     text-decoration: none;
+
 }
 
 /* Intro text */
@@ -233,7 +257,7 @@ td {
 
 
 .sidenav{
-    width:325px;
+    width:425px;
     background-color: #204862;
 }
 
@@ -250,12 +274,12 @@ td {
 
 #scoreCard {
     margin-top: 15px;
-    width: 300px;
+    width: 405px;
     background-color: #6793A3;
 }
 
 #linkCard {
-    width: 300px;
+    width: 405px;
     background-color: #6793A3;
 }
 
@@ -297,11 +321,30 @@ td {
 }
 
 
+#inputError{
+    color:red;
+}
+
+#usernameInput{
+    width: 50%;
+}
+
+input[type=text]:focus {
+    border-bottom: 1px solid #204862 !important;
+    box-shadow: 0 1px 0 0 #204862 !important;
+}
 
 
 
 
 
+#modalSynHS, #modalDefHS, #modalAntHS{
+    width: 500px;
+    height: 1200px;
+    /* position: absolute;
+    bottom: 300px; */
+    border-radius: 10px;
+}
 
 
 

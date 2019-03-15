@@ -483,6 +483,11 @@ var giphyAPI = {
 }
 
 $(document).ready(function () {
+    $('.tap-target').tapTarget();
+});
+
+
+$(document).ready(function () {
 
     $('.sidenav').sidenav();  //initializes sidebar with instructions
 
@@ -504,6 +509,7 @@ $(document).ready(function () {
     $('#demo-carousel').carousel();
     $('.modal').modal();
     $('.tabs').tabs();
+    M.updateTextFields();
 
 
 
@@ -588,6 +594,10 @@ $(document).ready(function () {
         $("#gameMode").show();
         $(".nextQuestionButton").remove();
         $(".choiceBtn").attr("disabled", false);
+        $("#gameoverDisplay").hide();
+        $("#scoreEnter").attr("disabled", false);
+        $("#scoreEnter").text("Submit Your Score");
+
         game.statsReset();
 
     })
@@ -595,7 +605,8 @@ $(document).ready(function () {
     // Triggers the modal to submit high score
     $("#scoreEnter").on("click", function () {
         $("#userScore").text(game.score)
-        $("#scoreSubmit").attr("diabled", false)
+        $("#scoreSubmit").attr("disabled", false)
+
         // var textOne = $("<div>");
         // textOne.text("Ok. You gave it the good ole college try.");
         // var textTwo = $("<div>");
@@ -615,18 +626,24 @@ $(document).ready(function () {
 
 
     //Submiting highscore
+ 
+
+
+
     $("#scoreSubmit").on("click", function (event) {
         event.preventDefault();
 
         var username = $("#usernameInput").val().trim();
 
-        if (username !== ""){
+        if (username !== "") {
             game.submitScore(username, game.score, game.scorePath)
             $("#scoreEnter").attr("disabled", true)
             $(this).attr("disabled", true)
             $("#scoreEnter").text("Score Entered")
-        }else{
-            console.log("error")
+            $("#inputError").text("")
+            $("#usernameInput").val("")
+        } else {
+            $("#inputError").text("Please Enter a Username.")
         }
     })
 
@@ -658,8 +675,6 @@ $(document).ready(function () {
 
     $("#synHSFullLink").on("click", function () {
 
-        console.log("synhs")
-
         $("#synHighScoresFull").empty();
 
         database.ref("/synscores").orderByChild("score").once("value").then(function (snapshot) {
@@ -682,8 +697,6 @@ $(document).ready(function () {
     })
 
     $("#antHSFullLink").on("click", function () {
-
-        console.log("anths")
 
         $("#antHighScoresFull").empty();
 
@@ -710,11 +723,13 @@ $(document).ready(function () {
 
     // Instruction FeatureDiscovery Function
 
-    $('.tap-target').tapTarget();
 
     //Antonym Mode
+
+
     $("#pic1").click(function () {
         $(".antText").show();
+
     });
 
     $("#pic1").click(function () {
@@ -752,6 +767,7 @@ $(document).ready(function () {
     });
 
 })
+
 
 
 

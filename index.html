@@ -40,10 +40,10 @@
 
       <div class="row">
         <div class="col s12">
-          <ul class="tabs white-text">
-            <li class="tab col s4"><a class="active" href="#defTab">Definitions</a></li>
-            <li class="tab col s4"><a href="#antTab">Antonyms</a></li>
-            <li class="tab col s4"><a href="#synTab">Synonyms</a></li>
+          <ul class="tabs ">
+            <li class="tab col s4 white-text"><a class="active" href="#defTab">Definition</a></li>
+            <li class="tab col s4 white-text"><a href="#antTab">Antonyms</a></li>
+            <li class="tab col s4 white-text"><a href="#synTab">Synonyms</a></li>
           </ul>
         </div>
 
@@ -213,9 +213,10 @@
       <p>C'mon. We know you can do it!</p>
       <p>Your final Score is: <span id="userScore">0</span></p>
 
-      <form id="scoreSubmitForm">
+      <form class ="input-field" id="scoreSubmitForm">
         <input type=text placeholder="Enter an Username" id="usernameInput">
-        <button id="scoreSubmit">Submit Your Score</button>
+        <div id="inputError"></div>
+        <button class="btn" id="scoreSubmit">Submit Your Score</button>
       </form>
     </div>
 
@@ -358,7 +359,8 @@
               <p class="white-text">You will be given a random word; choose which of the four words in the table is the
                 antonym for the given word.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 random words.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <div class="synText">
@@ -366,7 +368,8 @@
               <p class="white-text">You will be given a random word; choose which of the four words in the table is the
                 synonym for the given word.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 random words.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <div class="defText">
@@ -374,7 +377,8 @@
               <p class="white-text">Read the definition given, and click one of the four words in the table which
                 matches the definition.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 definitions.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <br>
