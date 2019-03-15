@@ -22,9 +22,6 @@ h1 {
 
 
 
-
-
-
 .tabs .tab a{
     color:white;
     background-color: #6793A3;
@@ -375,4 +372,5 @@ input[type=text]:focus {
     line-height: 40px;
     color: #204862;
 }
+
 
