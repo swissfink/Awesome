@@ -43,3 +43,5 @@ In Challenge Mode for every question you get correct your score goes up by one. 
 ## Misc
 **Technology Used**
 Merriam-Webster APIs + Giphy + Firebase + Materialize
+
+***
