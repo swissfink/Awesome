@@ -1,9 +1,92 @@
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBY5Uu1qg5YPy0YR_9JnJtzYPMTZJFicug",
+    authDomain: "awesomewordgame.firebaseapp.com",
+    databaseURL: "https://awesomewordgame.firebaseio.com",
+    projectId: "awesomewordgame",
+    storageBucket: "",
+    messagingSenderId: "673494931637"
+};
+
+firebase.initializeApp(config);
+var database = firebase.database();
+
+// Updating highscores table for each mode
+database.ref("/defscores").limitToLast(1).on("child_added", function (snapshot) {
+    //Updating top 5 high scores for definition
+
+    $("#defHighScores").empty();
+    database.ref("/defscores").orderByChild("score").limitToLast(5).once("value").then(function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+            var newRow = $("<tr>");
+            var usernameCol = $("<td>");
+            var scoreCol = $("<td>");
+
+            usernameCol.text(childSnapshot.val().username);
+            scoreCol.text(childSnapshot.val().score);
+
+            newRow.append(usernameCol, scoreCol);
+
+            $("#defHighScores").prepend(newRow);
+        })
+    })
+})
+
+database.ref("/synscores").limitToLast(1).on("child_added", function (snapshot) {
+    //Updating top 5 high scores for synonym
+
+    $("#synHighScores").empty();
+    database.ref("/synscores").orderByChild("score").limitToLast(5).once("value").then(function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+            var newRow = $("<tr>");
+            var usernameCol = $("<td>");
+            var scoreCol = $("<td>");
+
+            usernameCol.text(childSnapshot.val().username);
+            scoreCol.text(childSnapshot.val().score);
+
+            newRow.append(usernameCol, scoreCol);
+
+            $("#synHighScores").prepend(newRow);
+        })
+    })
+})
+
+database.ref("/antscores").limitToLast(1).on("child_added", function (snapshot) {
+    //Updating top 5 high scores for antonym
+
+    $("#antHighScores").empty();
+    database.ref("/antscores").orderByChild("score").limitToLast(5).once("value").then(function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+            var newRow = $("<tr>");
+            var usernameCol = $("<td>");
+            var scoreCol = $("<td>");
+
+            usernameCol.text(childSnapshot.val().username);
+            scoreCol.text(childSnapshot.val().score);
+
+            newRow.append(usernameCol, scoreCol);
+
+            $("#antHighScores").prepend(newRow);
+        })
+    })
+})
+
+
+
+
+
 var game = {
     //global variables for the game
     correctChoice: "",
     RNGseed: 0,
     correctSeed: 0,
     questionWord: "",
+    scorePath: "/defscores",
     score: 0,
     life: 3,
 
@@ -54,9 +137,14 @@ var game = {
         dictionaryAPI.getDataAntonym(game.questionWord);
     },
 
-    reset: function () {
+
+
+    statsReset: function () {
         game.score = 0;
         game.life = 3;
+        $("#life").text(game.life)
+        $("#score").text(game.score);
+
     },
 
     createNextButton: function (gamemode) {
@@ -66,7 +154,17 @@ var game = {
         $(".nextQuestionButton").on("click", function () {
             console.log("next")
             gamemode();
-            $(this).hide()
+            $(this).remove();
+            $(".choiceBtn").attr("disabled", false)
+
+        })
+    },
+
+    submitScore: function (userName, score, gamemodePath) {
+        //gamemodePath take string in form "/gamemode"+"scores" example: "/defscores"
+        database.ref(gamemodePath).push({
+            "username": userName,
+            "score": score
         })
     }
 }
@@ -94,23 +192,30 @@ var dictionaryAPI = {
             for (var i = 0; i < 4; i++) {
                 $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                 $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
+                    $(".choiceBtn").attr("disabled", true)
+
                     console.log("wrong")
                     $("#startBtn").show();
                     $("#gameResult").empty();
                     var newP = $("<p>").text("You are Incorrect!").text("The answer was " + game.questionWord);
                     $("#gameResult").append(newP);
-                    giphyAPI.createRewardImage("#gameResult", "fail");
-
-
-                    game.createNextButton(game.definitionMode);
+                    giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10));
 
 
                     if (game.challengeMode) {
                         game.life--;
                         $("#life").text(game.life)
                         if (game.life == 0) {
-                            console.log("gameover");
+                            $("#gameoverDisplay").show()
+                            game.scorePath = "/defscores"
+
+                        } else {
+                            game.createNextButton(game.definitionMode);
+
                         }
+                    } else {
+                        game.createNextButton(game.definitionMode);
+
                     }
                 })
             }
@@ -120,20 +225,21 @@ var dictionaryAPI = {
             $("#" + game.correctChoice).text(game.questionWord);
             $("#" + game.correctChoice).off();
             $("#" + game.correctChoice).on("click", function () {
+                $(".choiceBtn").attr("disabled", true)
+
                 console.log("correct")
                 $("#startBtn").show();
                 $("#gameResult").empty();
 
                 var newP = $("<p>").text("You are Correct!");
                 $("#gameResult").append(newP);
-                giphyAPI.createRewardImage("#gameResult", "reward");
+                giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10));
 
                 game.createNextButton(game.definitionMode);
 
                 if (game.challengeMode) {
                     game.score++;
                     $("#score").text(game.score);
-
                 }
             })
 
@@ -166,25 +272,35 @@ var dictionaryAPI = {
                 // creating choice table
 
                 for (var i = 0; i < 4; i++) {
+
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                     $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
+                        $(".choiceBtn").attr("disabled", true)
+
                         console.log("wrong")
                         $("#startBtn").show();
                         $("#gameResult").empty();
-
                         var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qsynonym)
                         $("#gameResult").append(newP)
-                        giphyAPI.createRewardImage("#gameResult", "fail")
-
-                        game.createNextButton(game.synonymMode);
+                        giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10))
 
                         if (game.challengeMode) {
                             game.life--;
                             $("#life").text(game.life)
 
                             if (game.life == 0) {
-                                console.log("gameover")
+                                $("#gameoverDisplay").show()
+                                game.scorePath = "/synscores"
+
+
+                            } else {
+                                game.createNextButton(game.synonymMode);
+
                             }
+
+                        } else {
+                            game.createNextButton(game.synonymMode);
+
                         }
                     })
 
@@ -217,13 +333,15 @@ var dictionaryAPI = {
 
                 $("#" + game.correctChoice).off();
                 $("#" + game.correctChoice).on("click", function () {
+                    $(".choiceBtn").attr("disabled", true)
+
                     console.log("correct")
                     $("#startBtn").show();
                     $("#gameResult").empty();
 
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
-                    giphyAPI.createRewardImage("#gameResult", "reward")
+                    giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10))
                     game.createNextButton(game.synonymMode);
 
                     if (game.challengeMode) {
@@ -255,23 +373,29 @@ var dictionaryAPI = {
                 for (var i = 0; i < 4; i++) {
                     $("#answer" + (parseInt(i) + parseInt(1))).text(game.wordBank[game.choices[i]]);
                     $("#answer" + (parseInt(i) + parseInt(1))).on("click", function () {
+                        $(".choiceBtn").attr("disabled", true)
                         console.log("wrong")
                         $("#startBtn").show();
                         $("#gameResult").empty();
                         var newP = $("<p>").text("You are Incorrect! The answer was " + dictionaryAPI.Qantonym)
                         $("#gameResult").append(newP)
-                        giphyAPI.createRewardImage("#gameResult", "fail")
+                        giphyAPI.createRewardImage("#gameResult", "fail", giphyAPI.offsetRNG(10))
                         if (game.challengeMode) {
                             game.life--;
                             $("#life").text(game.life)
 
                             if (game.life == 0) {
-                                console.log("gameover")
-                            }
+                                $("#gameoverDisplay").show()
+                                game.scorePath = "/antscores"
 
+
+                            } else {
+                                game.createNextButton(game.antonymMode);
+                            }
+                        } else {
+                            game.createNextButton(game.antonymMode);
                         }
 
-                        game.createNextButton(game.antonymMode);
 
                     })
 
@@ -303,13 +427,14 @@ var dictionaryAPI = {
 
                 game.correctChoiceSelect()
                 $("#" + game.correctChoice).text(dictionaryAPI.Qantonym);
+                $("#" + game.correctChoice).off();
                 $("#" + game.correctChoice).on("click", function () {
                     console.log("correct")
                     $("#startBtn").show();
                     $("#gameResult").empty();
                     var newP = $("<p>").text("You are Correct!")
                     $("#gameResult").append(newP)
-                    giphyAPI.createRewardImage("#gameResult", "reward")
+                    giphyAPI.createRewardImage("#gameResult", "reward", giphyAPI.offsetRNG(10))
 
                     game.createNextButton(game.antonymMode);
 
@@ -341,9 +466,9 @@ var giphyAPI = {
         return queryURL + $.param(queryParam);
     },
 
-    createRewardImage(appendLocation, topic) {
+    createRewardImage: function (appendLocation, topic, offset) {
         $.ajax({
-            url: giphyAPI.makeQueryURL(giphyAPI.api_key, topic, "1", "", ""),
+            url: giphyAPI.makeQueryURL(giphyAPI.api_key, topic, "1", "", offset),
             method: "GET"
         }).then(function (response) {
             var newImage = $("<img>");
@@ -351,9 +476,19 @@ var giphyAPI = {
             $(appendLocation).append(newImage)
 
         });
+    },
+
+    offsetRNG: function (limit) {
+        var offsetSeed = Math.floor(Math.random() * limit)
+        return offsetSeed
     }
 
 }
+
+$(document).ready(function () {
+    $('.tap-target').tapTarget();
+});
+
 
 $(document).ready(function () {
 
@@ -371,12 +506,16 @@ $(document).ready(function () {
     //     dist: 0,
     //     fullWidth: false,
     // })
+
+    //materialize initialization
     $("#gameMode").carousel()
     $('#demo-carousel').carousel();
     $('.modal').modal();
+    $('.tabs').tabs();
+    M.updateTextFields();
 
 
-    
+
 
 
     $("#defModePractice").on("click", function () {
@@ -385,6 +524,8 @@ $(document).ready(function () {
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
+        $("#challengeStats").hide();
+
 
     })
 
@@ -395,6 +536,8 @@ $(document).ready(function () {
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
+        $("#challengeStats").hide();
+
 
     })
 
@@ -406,6 +549,8 @@ $(document).ready(function () {
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
+        $("#challengeStats").hide();
+
 
     })
 
@@ -416,6 +561,8 @@ $(document).ready(function () {
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
+        $("#challengeStats").show();
+
 
     })
 
@@ -426,61 +573,166 @@ $(document).ready(function () {
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
-
+        $("#challengeStats").show();
     })
 
 
     $("#antModeChallenge").on("click", function () {
         game.antonymMode();
         game.challengeMode = true;
-
         $("#modeInstructions").hide();
         $("#gameDisplay").show();
         $("#gameMode").hide();
+        $("#challengeStats").show();
+
+    })
+
+    // Stuff Richard Added
+
+    // Restart Button 
+    $("#restartGame").on("click", function () {
+        $("#scoreEnter").attr("disabled", false)
+        $("#modeInstructions").show();
+        $("#gameDisplay").hide();
+        $("#gameMode").show();
+        $(".nextQuestionButton").remove();
+        $(".choiceBtn").attr("disabled", false);
+        $("#gameoverDisplay").hide();
+        $("#scoreEnter").attr("disabled", false);
+        $("#scoreEnter").text("Submit Your Score");
+
+        game.statsReset();
+
+    })
+
+    // Triggers the modal to submit high score
+    $("#scoreEnter").on("click", function () {
+        $("#userScore").text(game.score)
+        $("#scoreSubmit").attr("disabled", false)
+
+        // var textOne = $("<div>");
+        // textOne.text("Ok. You gave it the good ole college try.");
+        // var textTwo = $("<div>");
+        // textTwo.text("How about you give it another go?")
+        // var textThree = $("<div>");
+        // textThree.text("Let's see if you can get a high score.");
+        // var textFour = $("<div>");
+        // textFour.text("C'mon. We know you can do it!");
+        // var textFive = $("<div>")
+        // textFive.text("Your Final Score is: "+game.score)
+
+        // var scoreForm = $("<form>")
+
+
+        // $("#scoreForm").append(textOne,textTwo,textThree,textFour,textFive,scoreForm).addClass("lowScore");
+    })
+
+
+    //Submiting highscore
+ 
+
+
+
+    $("#scoreSubmit").on("click", function (event) {
+        event.preventDefault();
+
+        var username = $("#usernameInput").val().trim();
+
+        if (username !== "") {
+            game.submitScore(username, game.score, game.scorePath)
+            $("#scoreEnter").attr("disabled", true)
+            $(this).attr("disabled", true)
+            $("#scoreEnter").text("Score Entered")
+            $("#inputError").text("")
+            $("#usernameInput").val("")
+        } else {
+            $("#inputError").text("Please Enter a Username.")
+        }
+    })
+
+
+    //Creating Full highscore table
+
+    $("#defHSFullLink").on("click", function () {
+
+        $("#defHighScoresFull").empty();
+
+        database.ref("/defscores").orderByChild("score").once("value").then(function (snapshot) {
+
+            snapshot.forEach(function (childSnapshot) {
+                var newRow = $("<tr>");
+                var usernameCol = $("<td>");
+                var scoreCol = $("<td>");
+
+                usernameCol.text(childSnapshot.val().username);
+                scoreCol.text(childSnapshot.val().score);
+
+                newRow.append(usernameCol, scoreCol);
+
+                $("#defHighScoresFull").prepend(newRow);
+            })
+        })
+
+
+    })
+
+    $("#synHSFullLink").on("click", function () {
+
+        $("#synHighScoresFull").empty();
+
+        database.ref("/synscores").orderByChild("score").once("value").then(function (snapshot) {
+
+            snapshot.forEach(function (childSnapshot) {
+                var newRow = $("<tr>");
+                var usernameCol = $("<td>");
+                var scoreCol = $("<td>");
+
+                usernameCol.text(childSnapshot.val().username);
+                scoreCol.text(childSnapshot.val().score);
+
+                newRow.append(usernameCol, scoreCol);
+
+                $("#synHighScoresFull").prepend(newRow);
+            })
+        })
+
+
+    })
+
+    $("#antHSFullLink").on("click", function () {
+
+        $("#antHighScoresFull").empty();
+
+        database.ref("/antscores").orderByChild("score").once("value").then(function (snapshot) {
+
+            snapshot.forEach(function (childSnapshot) {
+                var newRow = $("<tr>");
+                var usernameCol = $("<td>");
+                var scoreCol = $("<td>");
+
+                usernameCol.text(childSnapshot.val().username);
+                scoreCol.text(childSnapshot.val().score);
+
+                newRow.append(usernameCol, scoreCol);
+
+                $("#antHighScoresFull").prepend(newRow);
+            })
+        })
+
 
     })
 
 
-})
 
+    // Instruction FeatureDiscovery Function
 
-
-// Stuff Richard Added
-
-// Restart Button 
-$("#restartGame").on("click", function () {
-    $("#modeInstructions").show();
-    $("#gameDisplay").hide();
-    $("#gameMode").show();        
-})
-
-// Modal Box Displaying message when player does NOT acheive a high score
-$("#modalNotHighScore").on("click", function () {
-    $("#notHighScore").empty();
-    var textOne = $("<div>");
-    textOne.text("Ok. You gave it the good ole college try.");
-    var textTwo = $("<div>");
-    textTwo.text("How about you give it another go?")
-    var textThree = $("<div>");
-    textThree.text("Let's see if you can get a high score.");
-    var textFour = $("<div>");
-    textFour.text("C'mon. We know you can do it!");
-    $("#notHighScore").append(textOne).append(textTwo).append(textThree).append(textFour).addClass("lowScore");
-})
-
-
-// Instruction FeatureDiscovery Function
-
-$(document).ready(function () {
-    $('.tap-target').tapTarget();
-});
-
-
-$(document).ready(function () {
 
     //Antonym Mode
+
+
     $("#pic1").click(function () {
         $(".antText").show();
+
     });
 
     $("#pic1").click(function () {
@@ -516,5 +768,10 @@ $(document).ready(function () {
     $("#pic3").click(function () {
         $(".defText").show();
     });
-});
+
+})
+
+
+
+
 

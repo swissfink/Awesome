@@ -23,101 +23,299 @@
 </head>
 
 <body>
-    
+
   <h1>Awesome Word Game</h1>
 
   <!-- <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> -->
-  
+
   <a data-target="slide-out" class=" sidenav-trigger waves-effect waves-light" id="sideButtonText">
     <div id="sideButton">High Scores & Other Links</div>
   </a>
 
-  <ul id="slide-out" class="sidenav" id="slidepanel"> <!--side panel with high scores, links and saved words-->
+  <ul id="slide-out" class="sidenav" id="slidepanel">
+    <!--side panel with high scores, links and saved words-->
+
 
     <ul class="collapsible">
-        
-      <div class="row"> <!--score card start -->
-        <div class="col s12 m6">
-          <div class="card" id="scoreCard">
-            <div class="card-content white-text" id="scoresText">
-              <span class="card-title">High Scores</span>
-              <table>
-                <thead>
-                  <tr>
-                    <th>NAME</th>
-                    <th>SCORE</th>
-                  </tr>
-                </thead>
 
-                <tbody>
-                  <tr>
-                    <td>Alvin</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>Alan</td>
-                    <td>9</td>
-                  </tr>
-                  <tr>
-                    <td>Jonathan</td>
-                    <td>8</td>
-                  </tr>
-                  <tr>
-                    <td>Abdul Basit Rashid</td>
-                    <td>8</td>
-                  </tr>
-                  <tr>
-                    <td>Azad</td>
-                    <td>7</td>
-                  </tr>
-                </tbody>
-              </table>
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs ">
+            <li class="tab col s4 white-text"><a class="active" href="#defTab">Definition</a></li>
+            <li class="tab col s4 white-text"><a href="#antTab">Antonyms</a></li>
+            <li class="tab col s4 white-text"><a href="#synTab">Synonyms</a></li>
+          </ul>
+        </div>
+
+
+        <div id="defTab" class="col s12">
+          <div class="row">
+            <!--score card start -->
+            <div class="col s12 m6">
+              <div class="card" id="scoreCard">
+                <div class="card-content white-text">
+                  <span class="card-title">Definition High Scores</span>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id=defHighScores>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-action">
+                  <button data-target="modalDefHS" class="btn modal-trigger" id="defHSFullLink">Click here for more
+                    scores</button>
+                </div>
+              </div>
             </div>
-            <div class="card-action" id="click">
-              <a href="#">Click here for more scores</a>
+          </div> <!-- end of score card -->
+        </div>
+        <!-- endTab -->
+
+        <div id="antTab" class="col s12">
+          <div class="row">
+            <!--score card start -->
+            <div class="col s12 m6">
+              <div class="card" id="scoreCard">
+                <div class="card-content white-text">
+                  <span class="card-title">Antonym High Scores</span>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                      </tr>
+                    </thead>
+
+                    <tbody id=antHighScores>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-action">
+                  <button data-target="modalAntHS" class="btn modal-trigger" id="antHSFullLink">Click here for more
+                    scores</button>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end of score card -->
+        </div>
+      </div>
+      <!-- endTab -->
+
+      <div id="synTab" class="col s12">
+        <div class="row">
+          <!--score card start -->
+          <div class="col s12 m6">
+            <div class="card" id="scoreCard">
+              <div class="card-content white-text">
+                <span class="card-title">Synonym High Scores</span>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id=synHighScores>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-action">
+                <button data-target="modalSynHS" class="btn modal-trigger" id="synHSFullLink">Click here for more
+                  scores</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div> <!-- end of score card -->
+        </div> <!-- end of score card -->
+      </div>
+      <!-- endTab -->
 
-      <div class="row"> <!-- start of useful links -->
+
+      <div class="row">
+        <!-- start of useful links -->
         <div class="col s12 m6">
           <div class="card" id="linkCard">
-            <div class="card-content white-text" id="linkText">
-              <span class="card-title">Useful Links</span>
+            <div class="card-content white-text">
+              <span class="card-title">Useful Links:</span>
             </div>
             <div class="card-action">
               <ul id="links">
-                <li><a href="https://www.merriam-webster.com/" target=" _blank"><button class="btn">Dictionary</button></a></li>
-                <li><a href="https://www.merriam-webster.com/thesaurus" target=" _blank"><button class="btn">Thesaurus</button></a></li>
+                <li><a href="https://www.merriam-webster.com/" target=" _blank"><button
+                      class="btn">Dictionary</button></a></li>
+                <li><a href="https://www.merriam-webster.com/thesaurus" target=" _blank"><button
+                      class="btn">Thesaurus</button></a></li>
                 <li><a href="https://forvo.com/" target="_blank"><button class="btn">Forvo.com</button></a></li>
-                <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank"> <button class="btn">Vocab Lists</button></a></li>
+                <li><a href="https://www.ef.edu/english-resources/english-vocabulary/" target="_blank"> <button
+                      class="btn">Vocab Lists</button></a></li>
               </ul>
             </div>
           </div>
         </div>
       </div> <!-- end of useful links -->
 
-    </ul> <!--end of collapsible -->
+
+
+
+    </ul>
+    <!--end of collapsible -->
 
   </ul> <!-- end of side panel -->
 
-  <div class="container" id="gameWindow">
+  <div id="gameWindow">
+
+    <div id="challengeStats">Life remaining:<span id="life"> 3</span> Score:<span id="score"> 0</span></div>
+
+    <div id="gameDisplay">
+
+      <h3 id="question">Question</h3>
+      <br>
+      <table id="answerChoices">
+        <tr>
+          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer1">Modal</button></td>
+          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer2">Modal</button></td>
+        </tr>
+        <tr>
+          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer3">Modal</button></td>
+          <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer4">Modal</button></td>
+        </tr>
+      </table>
+
+    </div> <!-- End of Game Display -->
+    <div class="waves-effect waves-light" id="restartGame">RESTART GAME</div>
+
+    <div id="gameoverDisplay">
+      <h4 id="gameoverText">Game Over</h4>
+      <button data-target="modal3" class="waves-effect waves-light modal-trigger" id="scoreEnter">Enter Your
+        Score</button>
+    </div>
+
+
+
+
+
 
     <!-- Modal Divs -->
     <div id="modal1" class="modal modal-fixed-footer">
       <div class="modal-content" id="gameResult"></div>
     </div>
 
-    <!-- This modal box is for the red input field that displays when a player does NOT achieves a high score -->
     <!-- <button data-target="modal3" class="btn modal-trigger modal-close" id="modalNotHighScore">Modal 3 - Not A High Score</button> -->
-    <div id="modal3" class="modal modal-fixed-footer">
-      <div class="modal-content" id="notHighScore"></div>
+    <div id="modal3" class="modal modal-fixed-footer lowScore">
+      <p>Ok. You gave it the good ole college try.</p>
+      <p>How about you give it another go?</p>
+      <p>Let's see if you get a high score</p>
+      <p>C'mon. We know you can do it!</p>
+      <p>Your final Score is: <span id="userScore">0</span></p>
+
+      <form class ="input-field" id="scoreSubmitForm">
+        <input type=text placeholder="Enter an Username" id="usernameInput">
+        <div id="inputError"></div>
+        <button class="btn" id="scoreSubmit">Submit Your Score</button>
+      </form>
     </div>
 
-    <div class="selectGameMode">
+    <!-- High Score Modals -->
+    <div id="modalDefHS" class="modal modal-fixed-footer">
+      <div class="modal-content" id="defHSDetails">
 
-        <div id="challengeStats">Life remaining:<span id="life"> 3</span> Score:<span id="score"> 0</span></div>
+        <div class="row">
+          <!--score card start -->
+          <div class="col s12 m6">
+            <div class="card" id="scoreCard">
+              <div class="card-content white-text">
+                <span class="card-title">Definition High Scores Full List</span>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="defHighScoresFull">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end of score card -->
+
+      </div>
+    </div>
+
+
+    <div id="modalSynHS" class="modal modal-fixed-footer">
+      <div class="modal-content" id="synHSDetails">
+
+        <div class="row">
+          <!--score card start -->
+          <div class="col s12 m6">
+            <div class="card" id="scoreCard">
+              <div class="card-content white-text">
+                <span class="card-title">Synonym High Scores Full List</span>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="synHighScoresFull">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end of score card -->
+
+
+      </div>
+    </div>
+
+
+    <div id="modalAntHS" class="modal modal-fixed-footer">
+      <div class="modal-content" id="antHSDetails">
+
+        <div class="row">
+          <!--score card start -->
+          <div class="col s12 m6">
+            <div class="card" id="scoreCard">
+              <div class="card-content white-text">
+                <span class="card-title">Antonym High Scores Full List</span>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="antHighScoresFull">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end of score card -->
+
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="selectGameMode container">
+
 
       <h2 id="modeInstructions">Choose a game mode from the options below.</h2>
 
@@ -143,28 +341,11 @@
           <a class="waves-effect waves-light btn int-button" id="defModeChallenge">Challenge</a>
         </div>
 
+
+
       </div> <!-- End of carousel items -->
 
-      <div id="gameDisplay">
-
-        <h3 id="question">The Word</h3>
-        <br>
-        <table id="answerChoices">
-          <tr>
-            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer1">Modal</button></td>
-            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer2">Modal</button></td>
-          </tr>
-          <tr>
-            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer3">Modal</button></td>
-            <td><button data-target="modal1" class="btn modal-trigger choiceBtn" id="answer4">Modal</button></td>
-          </tr>
-        </table>
-
-   
-        <div class="waves-effect waves-light" id="restartGame">RESTART GAME</div>
-        
-
-      </div> <!-- End of Game Display -->
+      <!-- Past Game Display -->
 
       <!-- Instructions that pop-up from bottom right of screen -->
 
@@ -178,26 +359,32 @@
               <p class="white-text">You will be given a random word; choose which of the four words in the table is the
                 antonym for the given word.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 random words.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <div class="synText">
               <h5>Synonyms Mode</h5>
-              <p class="white-text">You will be given a random word; choose which of the four words in the table is the synonym for the given word.</p>
+              <p class="white-text">You will be given a random word; choose which of the four words in the table is the
+                synonym for the given word.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 random words.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <div class="defText">
               <h5>Definitions Mode</h5>
-              <p class="white-text">Read the definition given, and click one of the four words in the table which matches the definition.</p>
+              <p class="white-text">Read the definition given, and click one of the four words in the table which
+                matches the definition.</p>
               <br>
-              <p>If you get the right answer, you get one point. You will be given a total of 10 definitions.</p>
+              <p>In Challenge Mode for every question you get correct your score goes up by one. You lose a life when
+                you get the answer wrong. Game Over when life is 0</p>
             </div>
 
             <br>
 
-            <a class="waves-effect waves-light btn close-button" onclick="$('.tap-target').tapTarget('close')">Close Instuctions</a>
+            <a class="waves-effect waves-light btn close-button" onclick="$('.tap-target').tapTarget('close')">Close
+              Instuctions</a>
 
           </div> <!-- end of tap-target-content section -->
 
@@ -210,6 +397,9 @@
   </div> <!-- end of Game window section -->
 
 
+  <!-- Firebase  -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+
   <!-- jQuery link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -218,6 +408,8 @@
 
   <!--Group Javascript File-->
   <script src="assets/javascript/logic.js"></script>
+
+
 
 </body>
 

@@ -13,13 +13,41 @@ h1 {
     background-color: #ff9746;
     color: #204862;
     border-radius: 10px;
-    
 }
 
 .btn:hover {
     background-color: #c8e3e8;
 }
 
+
+
+
+.tabs .tab a{
+    color:white;
+    background-color: #6793A3;
+} /*Black color to the text*/
+
+.tabs .tab a:hover {
+    background-color:#c8e3e8;
+    color:white;
+} /*Text color on hover*/
+
+.tabs .tab a.active {
+    background-color:#ff9746 !important;
+    color:#204862;
+    
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+    background-color:#204862;
+} /*Color of underline*/
+
+
+
+a{
+    text-decoration: none;
+
+}
 
 /* Intro text */
 
@@ -30,6 +58,7 @@ h1 {
 }
 
 #modeInstructions {
+    margin-top:45px;
     font-size: 24px;
     text-align: center;
     color: #204862;
@@ -38,10 +67,9 @@ h1 {
 /* The carousel pieces */
 
 .carousel {
-    margin-top: 30px;
     position: absolute;
-    top: 150px;
     right: 35px;
+    top: 0px;
 }
 
 #pic1,
@@ -92,6 +120,10 @@ h1 {
     border-width: 2px;
     border-radius: 10px;
     border-color: #204862;
+    position: absolute;
+    left:575px;
+    top: 150px;
+
 }
 
 #gameDisplay{
@@ -101,12 +133,12 @@ h1 {
 }
 
 #challengeStats{
-    position: relative;
+    position: absolute;
     text-align: center;
     color: #204862;
     font-size: 18px;
     top: -2px;
-    left: 541px;
+    right:-2px;
     padding-top: 10px;
     padding-bottom: 10px;
     border: 2px solid #204862;
@@ -118,11 +150,11 @@ h1 {
     background-color: #ff9746;
     color: #204862;
     text-transform: uppercase;
-    position: relative;
+    position: absolute;
     text-align: center;
     font-size: 18px;
-    top: 30px;
-    left: 541px;
+    bottom: -2px;
+    right: -2px;
     padding-top: 10px;
     padding-bottom: 10px;
     border: 2px solid #204862;
@@ -138,11 +170,12 @@ h1 {
     background-color: #ff9746;
     color: #204862;
     text-transform: uppercase;
-    position: relative;
+    position: absolute;
     text-align: center;
     font-size: 18px;
-    top: 124px;
-    right: 51px;
+    bottom: -2px;
+    left: -2px;
+
     padding-top: 10px;
     padding-bottom: 10px;
     border: 2px solid #204862;
@@ -170,13 +203,15 @@ td {
     text-align: center;
     line-height: 28px;
     margin-bottom: 20px;
+
 }
 
 /* Where the giphy is displayed */
 
 #modal1 {
-    width: 350px;
-    height: 350px;
+    width: 500px;
+    height: 500px;
+    overflow-x:hidden;
     position: absolute;
     bottom: 300px;
     border-radius: 10px;
@@ -219,7 +254,7 @@ td {
 
 
 .sidenav{
-    width:325px;
+    width:425px;
     background-color: #204862;
 }
 
@@ -236,48 +271,77 @@ td {
 
 #scoreCard {
     margin-top: 15px;
-    width: 280px;
+    width: 405px;
     background-color: #6793A3;
-    border-radius: 10px;
-}
-
-th {
-    color: #FF9746;
-    font-size: 20px;
-}
-
-#click {
-    text-align: center;
 }
 
 #linkCard {
-    width: 280px;
+    width: 405px;
     background-color: #6793A3;
-    border-radius: 10px;
-    text-align: center;
-}
-
-#scoresText {
-    text-align: center;
-}
-
-#linkText {
-    text-align: center;
 }
 
 #usefulLinks {
     font-size: 20px;
     padding: 10px;
-    
+}
+
+#gameoverDisplay{
+    display: none;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+
+
+}
+
+#scoreEnter{
+    background-color: #ff9746;
+    color: #204862;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #204862;
+    border-radius: 10px 0px 10px 0px;
+    width: 258px;
+    font-size: 18px;
+}
+
+#gameoverDisplay:hover {
+    /* background-color: #c8e3e8; */
+}
+
+
+#gameoverText{
+    position: absolute;
+    top: -70px;
+}
+
+
+#inputError{
+    color:red;
+}
+
+#usernameInput{
+    width: 50%;
+}
+
+input[type=text]:focus {
+    border-bottom: 1px solid #204862 !important;
+    box-shadow: 0 1px 0 0 #204862 !important;
 }
 
 
 
 
 
-
-
-
+#modalSynHS, #modalDefHS, #modalAntHS{
+    width: 500px;
+    height: 1200px;
+    /* position: absolute;
+    bottom: 300px; */
+    border-radius: 10px;
+}
 
 
 
@@ -295,8 +359,8 @@ th {
 }
 
 #modal3 {
-    width: 500px;
-    height: 230px;
+    width: 800px;
+    height: 800px;
     position: absolute;
     bottom: 300px;
     border-radius: 10px;
@@ -308,4 +372,5 @@ th {
     line-height: 40px;
     color: #204862;
 }
+
 
