@@ -142,6 +142,9 @@ var game = {
     statsReset: function () {
         game.score = 0;
         game.life = 3;
+        $("#life").text(game.life)
+        $("#score").text(game.score);
+
     },
 
     createNextButton: function (gamemode) {
