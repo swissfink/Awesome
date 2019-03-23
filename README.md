@@ -44,4 +44,4 @@ In Challenge Mode for every question you get correct your score goes up by one. 
 **Technology Used**
 Merriam-Webster APIs + Giphy + Firebase + Materialize
 
-***
+[Link to deployed site.](https://swissfink.github.io/Awesome/)
