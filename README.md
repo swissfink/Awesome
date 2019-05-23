@@ -1,6 +1,7 @@
 # Awesome Word Game
 Breakout Group 2 Project 1
 
+![Image of Awesome Word Game Landing Page](https://github.com/qgwright/Group-Project-2/blob/master/public/images/callo-homepage.png)
 
 ## Background
 The purpose of this project was to create a game that increases English vocabulary exposure and retention for students studying for the GREs.
